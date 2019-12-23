@@ -35,7 +35,7 @@ def highway_to_geodata(df):
     return df
 
 
-def plot_line_polygon():
+def plot_line_polygon(legend_box, font_size):
     """Plot lines and polygons."""
     geodata_highway = highway_to_geodata(_data_)
     fig, ax = plt.subplots(1, figsize=(10, 8))
@@ -44,13 +44,13 @@ def plot_line_polygon():
 
     leg = ax.get_legend()
     leg.set_title("highway")
-    leg.set_bbox_to_anchor((0.0, 0.05, 0.01, 0.9))
-    plt.title("Highway", fontsize=30)
+    leg.set_bbox_to_anchor(legend_box)
+    plt.title("Road infrastructure in Berlin", fontsize=font_size)
     plt.axis("off")
     plt.savefig(destination+"roads.png", dpi=300)
 
 
-def plot_lines():
+def plot_lines(legend_box, font_size):
     """Plot lines."""
     geodata_line = highway_to_geodata(df_line)
     fig, ax = plt.subplots(1, figsize=(10, 8))
@@ -59,13 +59,13 @@ def plot_lines():
 
     leg = ax.get_legend()
     leg.set_title("highway")
-    leg.set_bbox_to_anchor((0.0, 0.05, 0.01, 0.9))
-    plt.title("Highway Lines", fontsize=30)
+    leg.set_bbox_to_anchor(legend_box)
+    plt.title("Road infrastructure in Berlin", fontsize=font_size)
     plt.axis("off")
     plt.savefig(destination+"lines.png", dpi=300)
 
 
-def plot_point():
+def plot_point(legend_box, font_size):
     """Plot points."""
     geodata_point = highway_to_geodata(df_point)
     fig, ax = plt.subplots(1, figsize=(10, 8))
@@ -74,13 +74,13 @@ def plot_point():
 
     leg = ax.get_legend()
     leg.set_title("highway")
-    leg.set_bbox_to_anchor((0.0, 0.05, 0.01, 0.9))
-    plt.title("Street light infrastructure in Berline", fontsize=30)
+    leg.set_bbox_to_anchor(legend_box)
+    plt.title("Street light infrastructure in Berlin", fontsize=font_size)
     plt.axis("off")
     plt.savefig(destination+"points.png", dpi=300)
 
 
-def plot_polygon():
+def plot_polygon(legend_box, font_size):
     """Plot polygons."""
     geodata_polygon = highway_to_geodata(df_polygon)
     fig, ax = plt.subplots(1, figsize=(10, 8))
@@ -89,8 +89,8 @@ def plot_polygon():
 
     leg = ax.get_legend()
     leg.set_title("highway")
-    leg.set_bbox_to_anchor((0.0, 0.05, 0.01, 0.9))
-    plt.title("Road infrastructure in Berlin", fontsize=30)
+    leg.set_bbox_to_anchor(legend_box)
+    plt.title("Road infrastructure in Berlin", fontsize=font_size)
     plt.axis("off")
     plt.savefig(destination+"polygon.png", dpi=300)
 
@@ -98,5 +98,7 @@ def plot_polygon():
 if __name__ == "__main__":
     sns.set_style("dark")
     sns.set_context("notebook", font_scale=0.8, rc={"lines.linewidth": 1.5})
-    plot_point()
-    plot_line_polygon()
+    legend_box = (0.0, 0.05, 0.01, 0.7)
+    font_size = 20
+    plot_point(legend_box, font_size)
+    plot_line_polygon(legend_box, font_size)

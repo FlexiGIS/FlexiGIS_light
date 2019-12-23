@@ -26,12 +26,10 @@ else:
 # output data destination
 destination = "../data/02_urban_output_data/"
 
-# TODO: generate log file
+
 ##################
 # Helper functions
 ##################
-
-
 def compute_area(dataset, width):
     """Compute area for each line feature and return a dataframe object.
 
