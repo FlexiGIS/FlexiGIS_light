@@ -59,9 +59,9 @@ environment can be created by following the steps from https://packaging.python.
 the required python dependencies by running:
 
 activate the virtual environment
+
 ```
 source virtual_env_name/bin/activate
-
 ```
 cd into the unzipped or cloned FlexiGIS directory
 
