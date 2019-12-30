@@ -13,23 +13,18 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="../code/log/flexigis_highways.log",
                     level=logging.DEBUG)
 
-
-if Path("../data/02_urban_output_data/").exists():
+# output data destination
+destination = "../data/02_urban_output_data/"
+if Path(destination).exists():
     logging.info("directory {} already exists.".
                  format("02_urban_output_datas"))
     pass
 else:
-    os.mkdir("../data/02_urban_output_data/")
+    os.mkdir(destination)
     logging.info("directory {} succesfully created!.".
                  format("02_urban_output_datas"))
 
-# output data destination
-destination = "../data/02_urban_output_data/"
 
-
-##################
-# Helper functions
-##################
 def compute_area(dataset, width):
     """Compute area for each line feature and return a dataframe object.
 
@@ -54,9 +49,9 @@ def data_to_csv(dataset, name="name"):
     dataset: dataframe object
     name: str object, name of the output csv file (the table name).
     """
-    dataset_new = dataset["polygon_1"].str.split(";", n=1, expand=True)
+    dataset_new = dataset["geometry"].str.split(";", n=1, expand=True)
     dataset["polygon"] = dataset_new[1]
-    dataset = dataset.drop(columns=["polygon_1"])
+    dataset = dataset.drop(columns=["geometry"])
     return dataset.to_csv(name, encoding="utf-8")
 
 
@@ -89,7 +84,7 @@ class GetLines:
 
         # save selected columns as pandas dataframe
         self.df = pd.DataFrame(self.rows, columns=["osm_id", self.ways_column,
-                                                   "length", "polygon_1"])
+                                                   "length", "geometry"])
         self.data = self.df.dropna().sort_values(by="highway")
         logging.info("line properties for highway extracted from database.")
         return self.data
@@ -138,7 +133,7 @@ class GetPolygons:
         # save selected columns as pandas dataframe
         self.df = pd.DataFrame(self.rows, columns=[
             "osm_id", self.ways_column,
-            "area", "polygon_1"])
+            "area", "geometry"])
         self.data = self.df.dropna().sort_values(by="highway")
         return self.data
         logging.info("polygon properties for highway extracted from database.")
@@ -184,7 +179,7 @@ class GetPoints:
 
         # save selected columns as pandas dataframe
         self.df = pd.DataFrame(self.rows, columns=[
-            "osm_id", self.ways_column, "polygon_1", "Longitude", "Latitude"])
+            "osm_id", self.ways_column, "geometry", "Longitude", "Latitude"])
         self.data = self.df.dropna().sort_values(by="highway")
         return self.data
         logging.info("node properties for highway extracted from database.")
@@ -224,4 +219,3 @@ if __name__ == "__main__":
     points = GetPoints()
     data_point = points.get_point_from_db(cur, conn)
     points.get_point_features(data_point)
-    logging.info("highway data abstraction done.")

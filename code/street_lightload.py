@@ -5,35 +5,35 @@ import logging
 import os
 from pathlib import Path
 
-logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
-                    filename="../code/log/street_lightload.log",
-                    level=logging.DEBUG)
-
-if Path("../data/03_urban_energy_requirements/").exists():
-    logging.info("directory {} already exists.".
-                 format("03_urban_energy_requirements"))
-    pass
-else:
-    os.mkdir("../data/03_urban_energy_requirements/")
-    logging.info("directory {} succesfully created!.".
-                 format("03_urban_energy_requirements"))
-
 
 def compute_streetlight_load():
     """Generate street light load time series."""
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     # Configuration
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    input_destination1 = "../data/01_raw_input_data/"
+    input_destibnation2 = "../data/02_urban_output_data/"
+    destination_load = "../data/03_urban_energy_requirements/"
+    destination_fig = "../data/04_Visualisation/"
+
+    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                        filename="../code/log/street_lightload.log",
+                        level=logging.DEBUG)
+
+    if Path(destination_load).exists():
+        logging.info("directory {} already exists.".
+                     format("03_urban_energy_requirements"))
+        pass
+    else:
+        os.mkdir(destination_load)
+        logging.info("directory {} succesfully created!.".
+                     format("03_urban_energy_requirements"))
 
     soda = 0
     Standardload = 1
     EUIx = 1
     sl = 1
 
-    input_destination1 = "../data/01_raw_input_data/"
-    input_destibnation2 = "../data/02_urban_output_data/"
-    destination_load = "../data/03_urban_energy_requirements/"
-    destination_fig = "../data/04_Visualisation/"
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     # Read Solar data
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +43,7 @@ def compute_streetlight_load():
                            encoding="ISO-8859-1", delimiter=',')
         # GHI = soda['Global Horiz']/1000  # convert to kWh/m2
         # wind = soda['Wind speed']
-        logging.info("SoDa csv file read.")
+        logging.info("Soda csv file read.")
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     # Read Standard Load Profiles
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
