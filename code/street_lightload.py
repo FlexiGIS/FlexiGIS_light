@@ -92,11 +92,16 @@ def compute_streetlight_load():
         fname.close()
         df6 = pd.read_csv(destination_load+"streetlight_load.csv",
                           delimiter=";", index_col='TIME', parse_dates=True)
-        df6['Load[kWh]'].plot()
         total_street_load = df6['Load[kWh]'].sum()
         print("Total street light load: "+str(total_street_load)+"kWh")
+        fig, ax = plt.subplots(1, figsize=(10, 7))
+        df6["2014-01-01":"2014-01-03"].\
+            plot(ax=ax, legend=False, title="Street-lighting load time-series")
+        plt.xlabel("Time [h]")
+        plt.ylabel("Load [kWh]")
         plt.savefig(destination_fig +
                     "load_streetlight_planet_osm_line.png", dpi=300)
+        plt.show()
 
         logging.info("Street. quarter hourly ERs simulated.")
 

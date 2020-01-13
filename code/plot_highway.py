@@ -38,7 +38,7 @@ def highway_to_geodata(df):
 def plot_line_polygon(legend_box, font_size):
     """Plot lines and polygons."""
     geodata_highway = highway_to_geodata(_data_)
-    fig, ax = plt.subplots(1, figsize=(10, 8))
+    fig, ax = plt.subplots(1, figsize=(8, 5))
     geodata_highway.plot(column='highway', categorical=True, legend=True,
                          ax=ax, linewidth=1, cmap='tab20', edgecolor="0.8")
 
@@ -53,7 +53,7 @@ def plot_line_polygon(legend_box, font_size):
 def plot_lines(legend_box, font_size):
     """Plot lines."""
     geodata_line = highway_to_geodata(df_line)
-    fig, ax = plt.subplots(1, figsize=(10, 8))
+    fig, ax = plt.subplots(1, figsize=(8, 5))
     geodata_line.plot(column='highway', categorical=True, legend=True,
                       ax=ax, linewidth=1, cmap='tab20', edgecolor="0.8")
 
@@ -68,7 +68,7 @@ def plot_lines(legend_box, font_size):
 def plot_point(legend_box, font_size):
     """Plot points."""
     geodata_point = highway_to_geodata(df_point)
-    fig, ax = plt.subplots(1, figsize=(10, 8))
+    fig, ax = plt.subplots(1, figsize=(8, 5))
     geodata_point.plot(column='highway', categorical=True, legend=True,
                        ax=ax, linewidth=1, cmap='Accent', edgecolor="0.8")
 
@@ -83,7 +83,7 @@ def plot_point(legend_box, font_size):
 def plot_polygon(legend_box, font_size):
     """Plot polygons."""
     geodata_polygon = highway_to_geodata(df_polygon)
-    fig, ax = plt.subplots(1, figsize=(10, 8))
+    fig, ax = plt.subplots(1, figsize=(8, 5))
     geodata_polygon.plot(column='highway', categorical=True, legend=True,
                          ax=ax, linewidth=1, cmap='Dark2', edgecolor="0.8")
 

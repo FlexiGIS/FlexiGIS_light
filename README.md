@@ -13,6 +13,8 @@ The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modi
 
 ![FlexiGIS Buildings](data/04_Visualisation/points.png)
 
+![FlexiGIS Buildings](data/04_Visualisation/load_streetlight_planet_osm_line.png)
+
 ## System requirements
 FlexiGIS is developed and tested on Linux (Ubuntu 16.04.6). The tools and software used in FlexiGIS and their versions are listed in the following:
 
