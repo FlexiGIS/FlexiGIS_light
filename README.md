@@ -9,10 +9,12 @@ The datasets can be redistributed and/or modified resulted by FlexiGIS under the
 
 The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License". Redistribution and use in source and binary forms, with or without modification, are permitted. For more information concerning the BSD-3C and the description of the terms under which you can use the FlexiGIS code, please visit https://opensource.org/licenses/BSD-3-Clause.
 
+Model I.
 ![FlexiGIS Buildings](data/04_Visualisation/roads.png)
 
 ![FlexiGIS Buildings](data/04_Visualisation/points.png)
 
+Model II.
 ![FlexiGIS Buildings](data/04_Visualisation/load_streetlight_planet_osm_line.png)
 
 ## System requirements
