@@ -94,14 +94,18 @@ def compute_streetlight_load():
                           delimiter=";", index_col='TIME', parse_dates=True)
         total_street_load = df6['Load[kWh]'].sum()
         print("Total street light load: "+str(total_street_load)+"kWh")
-        fig, ax = plt.subplots(1, figsize=(10, 7))
-        df6["2014-01-01":"2014-01-03"].\
-            plot(ax=ax, legend=False, title="Street-lighting load time-series")
-        plt.xlabel("Time [h]")
+
+        # plot load profile
+        fig, ax = plt.subplots(1, figsize=(8, 4), facecolor='whitesmoke')
+        df6["2014-01-01":"2014-01-15"].\
+            plot(ax=ax, legend=False, color="royalblue",
+                 title="Street-lighting load time-series")
+        ax.set_facecolor("whitesmoke")
+        plt.xlabel("Time [15 min.]")
         plt.ylabel("Load [kWh]")
         plt.savefig(destination_fig +
-                    "load_streetlight_planet_osm_line.png", dpi=300)
-        plt.show()
+                    "load_streetlight_planet_osm_line.png",
+                    facecolor=fig.get_facecolor(), dpi=300)
 
         logging.info("Street. quarter hourly ERs simulated.")
 
