@@ -56,6 +56,7 @@ POINT_CSV:= $(urban_output)/planet_osm_point.csv
 .PHONY: export_data
 .PHONY: abstract_data
 .PHONY: streetlight_load
+.PHONY: shapefile
 .PHONY: drop_database
 
 #=================================================================================#
@@ -155,6 +156,17 @@ streetlight_load:
 	@if [ -e $(LINES_CSV) ]; then python street_lightload.py ; fi
 	@echo "streetlight energy modelling done." >> log/streetlight.log
 	@echo "--> Done. Saving load data as CSV files and Load profile plot as png"
+
+#=================================================================================#
+#             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
+#=================================================================================#
+
+# if you wish to generate shape files for interactive visualisation on QGIS
+shapefile:
+	@echo "\n### Convert georeferenced csv files to shape files ###"
+	@if [ -e $(LINES_CSV) ]; then python create_shapefile.py; fi
+
+
 #=================================================================================#
 #              DROPPING                                                           #
 #=================================================================================#
@@ -162,6 +174,5 @@ streetlight_load:
 # If you wish to drop your database
 
 drop_database:
-	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
-	@if [ "$(answer)" = "yes" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi
-
+	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
+	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi

@@ -52,6 +52,7 @@ def data_to_csv(dataset, name="name"):
     dataset_new = dataset["geometry"].str.split(";", n=1, expand=True)
     dataset["polygon"] = dataset_new[1]
     dataset = dataset.drop(columns=["geometry"])
+    dataset = dataset.rename(columns={"polygon": "geometry"})
     return dataset.to_csv(name, encoding="utf-8")
 
 
@@ -110,7 +111,7 @@ class GetLines:
 
 
 class GetPolygons:
-    """Object class that gets polygon data from database and export output to csv.
+    """Gets highway polygons from database and export output to csv.
 
     get_polygons_from_db: returns querried database table as pandas dataframe.
     get_polygons_features: returns csv file of highway categories(polygons).
@@ -155,7 +156,7 @@ class GetPolygons:
 
 
 class GetPoints:
-    """Object class that gets point data from database and export output to csv.
+    """Gets highway points(Nodes) from database and export output to csv.
 
     get_point_from_db: returns querried database table as pandas dataframe.
     get_point_features: returns csv file of highway categories(points)
