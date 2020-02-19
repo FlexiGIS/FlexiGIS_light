@@ -2,7 +2,7 @@
 #   FlexiGIS_road_infrastructure                                                  #
 #                                                                                 #
 #   Copyright "2020" "DLR VE"                                                     #
-#										  #
+#										  										  #
 #   Licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License"  #
 #                                                                                 #
 #   Redistribution and use in source and binary forms, with or without            #
@@ -37,7 +37,7 @@
 
 # 1. URL of the OSM raw data (used for OSM raw data download)
 OSM_raw_data_URL:=https://download.geofabrik.de/europe/germany/berlin-latest.osm.pbf
-
+# https://download.geofabrik.de/europe/germany/berlin.poly
 # 2. Name of the OSM raw data file (used for data filtering by osmosis)
 OSM_raw_data:=../data/01_raw_input_data/berlin-latest.osm.pbf
 
@@ -49,7 +49,6 @@ polyfile:=../data/01_raw_input_data/berlin.poly
 #    temporary folder if more disk space is needed when filtering OSM raw data
 #    For Mac OS systems it might be /usr/local/bin/osmosis
 osmosis_bin:=../data/01_raw_input_data/osmosis/
-osmosis_tmp_folder:=/tmp
 
 # 5. Name of the filtered OSM urban data file (used for data export by osm2pgsql)
 OSM_merged_data:=../data/01_raw_input_data/02-UrbanInfrastructure.osm.pbf
@@ -67,11 +66,11 @@ osm2pgsql_num_processes:=1
 # 8. PostgreSQL connection parameters:
 #    The database will be created and hold the filtered OSM urban data
 postgres_cluster:=9.1/main
-postgres_database:=database
-postgres_user:=username
-postgres_port:=port
-postgres_host:=host_ip
-postgres_password:=password
+postgres_database:=esy_Berlin_FlexiGIS_test_cch
+postgres_user:=esa
+postgres_port:=5432
+postgres_host:=10.160.84.200
+postgres_password:=pg3sa
 
 # 9. Location of the output folders
 urban_output:=../data/02_urban_output_data/

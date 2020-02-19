@@ -63,8 +63,7 @@ def compute_streetlight_load():
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     # Read Electricity Usage Index kwh/m2 per year
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%comput_streetlight_load%%%%%%%%%%%%%%%%%%%%%%
-    if EUIx == 1:  # from __future__ import division
-        # import datetime
+    if EUIx == 1:
         print('Read electricity Usage Index kwh/m2 per year')
         x_sl = 4/1000  # EUIsl
 
@@ -76,9 +75,8 @@ def compute_streetlight_load():
         # read csv file of line and polygon
         dfsl1 = pd.read_csv(input_destibnation2+'planet_osm_line.csv')
         dfsl2 = pd.read_csv(input_destibnation2+'planet_osm_polygon.csv')
-        dfsl = pd.concat([dfsl1.loc[:, ["highway", "osm_id", "area", "polygon"]
-                                    ], dfsl2.loc[:, ["highway", "osm_id",
-                                                     "area", "polygon"]]],
+        dfsl = pd.concat([dfsl1.loc[:, ["highway", "osm_id", "area"]],
+                          dfsl2.loc[:, ["highway", "osm_id", "area"]]],
                          ignore_index=True)
         area_sl = dfsl['area'].sum()
         # no_building = len(dfsl)

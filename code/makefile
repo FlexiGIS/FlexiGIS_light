@@ -79,32 +79,13 @@ download:
 	@echo "--> Done. Download OSM raw data"
 
 filter_data:
-	@echo "\n### Filtering the OSM road infrastructure raw data for highways:"
+	@echo "\n### Filtering the OSM raw geo-urban datasets:"
 	@date >> log/osmosis.log
 	osmosis \
 	--read-pbf file=$(OSM_raw_data) \
-	--tag-filter accept-ways building=* --used-node \
 	--bounding-polygon file=$(polyfile) \
-	--buffer outPipe.0=building \
-	--read-pbf file=$(OSM_raw_data) \
-	--tag-filter accept-ways highway=* --used-node \
-	--bounding-polygon file=$(polyfile) \
-	--buffer outPipe.0=highway \
-	--read-pbf file=$(OSM_raw_data) \
-	--tag-filter accept-ways landuse=* --used-node \
-	--bounding-polygon file=$(polyfile) \
-	--buffer outPipe.0=landuse_1 \
-	--read-pbf file=$(OSM_raw_data) \
-	--tag-filter accept-relations landuse=* --used-node \
-	--bounding-polygon file=$(polyfile) \
-	--buffer outPipe.0=landuse_2 \
-	--merge inPipe.0=landuse_1 inPipe.1=landuse_2 \
-	--buffer outPipe.0=landuse_all \
-	--merge inPipe.0=landuse_all inPipe.1=building \
-	--buffer outPipe.0=landuse_building \
-	--merge inPipe.0=landuse_building inPipe.1=highway \
+	--tag-filter accept-ways highway=* \
 	--write-pbf file=$(OSM_merged_data) >> log/osmosis.log 2>&1;
-	#@touch log/filter.done
 	@echo "osmosis data filtering done." >> log/osmosis.log
 	@date >> log/osmosis.log
 	@echo "--> Done. OSM filtered urban energy infrastructure"

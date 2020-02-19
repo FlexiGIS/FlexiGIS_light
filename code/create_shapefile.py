@@ -27,6 +27,8 @@ def csv_to_shapefile():
         gdf = GeoDataFrame(df, geometry="geometry_shp")
         gdf = gdf.drop(columns=["geometry"])
         gdf.rename(columns={"geometry_shp": "geometry"})
+        # gdf.crs = {'init': 'epsg:4326'}
+        # gdf = gdf.to_crs({'init': 'epsg:3857'})
         gdf.to_file(driver='ESRI Shapefile',
                     filename=shape_file_dest+base_name)
 
