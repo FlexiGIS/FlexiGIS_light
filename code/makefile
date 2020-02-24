@@ -71,15 +71,14 @@ all: drop_database download filter_data export_data abstract_data streetlight_lo
 
 # Step1: Download the OSM raw geo urban data.
 download:
-	@echo "\n### Step1 ### \nDownload the OSM road infrastructure raw data from \n   '$(OSM_raw_data_URL)' \n and saving it to \n   '$(OSM_raw_data)':"
+	@echo "\n STEP 1: \nDownload the OSM road infrastructure raw data from \n '$(OSM_raw_data_URL)' \n and saving it to \n '$(OSM_raw_data)':"
 	@date >> log/download.log
 	wget -nv -O $(OSM_raw_data) $(OSM_raw_data_URL) >> log/download.log 2>&1
 	@echo "Done. Download OSM raw data" >> log/download.log
-	#@date >> log/download.log
 	@echo "--> Done. Download OSM raw data"
 
 filter_data:
-	@echo "\n### Filtering the OSM raw geo-urban datasets:"
+	@echo "\n STEP 2: \nFILTERING PBF FILE WITH BOUNDING POLY FILE"
 	@date >> log/osmosis.log
 	osmosis \
 	--read-pbf file=$(OSM_raw_data) \
@@ -88,14 +87,14 @@ filter_data:
 	--write-pbf file=$(OSM_merged_data) >> log/osmosis.log 2>&1;
 	@echo "osmosis data filtering done." >> log/osmosis.log
 	@date >> log/osmosis.log
-	@echo "--> Done. OSM filtered urban energy infrastructure"
+	@echo "INFO: URBAN INFRASTRUCTURE PBF FILE GENERATED FROM POLY FILE"
 #=================================================================================#
 #              URBAN DATA EXPORT TO DATABASE                                      #
 #=================================================================================#
 
 # Step3: Export the Filtered OSM data to the Postgres Server.
 export_data:
-	@echo "\n### Step3 ### \nExporting the Filtered OSM data to Postgres Server:"
+	@echo "\n STEP 3: \nExporting the Filtered OSM data to Postgres Server"
 	@date >> log/database.log
 	export PGPASSWORD=$(postgres_password); createdb -U $(postgres_user) -h $(postgres_host) $(postgres_database);
 	export PGPASSWORD=$(postgres_password); $(osm2pgsql_bin) -r pbf --username=$(postgres_user) --database=$(postgres_database) --host=$(postgres_host) --port=$(postgres_port) -s \
@@ -104,7 +103,7 @@ export_data:
 	@echo "OSM data export to database done." >> log/database.log
 	@date >> log/osm2pgsql.log
 	#@date >> log/database.log
-	@echo "--> Done. FlexiGIS OSM data Export."
+	@echo "INFO: GEO-DATA EXPORT TO POSTGRES DATABASE COMPLETE."
 
 #=================================================================================#
 #              ABSTRACTION AND DATA PROCESSING (HIGHWAY)                          #
@@ -112,8 +111,7 @@ export_data:
 
 # Step4: Execute the abstraction script get_highways.py on the database created in Step3
 abstract_data:
-	@echo "\n### Step4 ### \nRunning the extraction script get_highways.py on the database '$(postgres_database)':"
-	# log/abstraction.done: log/database_import.done
+	@echo "\n STEP 4: \n Running the abstraction script on '$(postgres_database)':"
 	@date >> log/abstract.log
 	@if [ $(postgres_password) =  ]; \
 	then \
@@ -124,7 +122,7 @@ abstract_data:
 	@echo "highway data abstraction done." >> log/abstract.log
 	@if [ -e $(POLYGONS_CSV) ]; then python plot_highway.py ; fi
 	@echo "highway plots generated." >> log/abstract.log
-	@echo "--> Done. FlexiGIS Highways Data Abstraction."
+	@echo "INFO: HIGHWAY GEO_DATA ABSTRACTION COMPLETE."
 
 #=================================================================================#
 #              MODELLING URBAN ENERGY REQUIREMENT                                 #
@@ -132,11 +130,11 @@ abstract_data:
 
 # Step5: Modelling urban energy requirements
 streetlight_load:
-	@echo "\n### Step5 ### \nModelling streetlight load and saving output as csv file to folder '$(load_folder)':"
+	@echo "\n STEP 5: \n Modelling Streetlight Load and saving utput as csv file to folder '$(load_folder)':"
 	@date >> log/streetlight.log
-	@if [ -e $(LINES_CSV) ]; then python street_lightload.py ; fi
+	@if [ -e $(LINES_CSV) ]; then python street_scenarios.py ; fi
 	@echo "streetlight energy modelling done." >> log/streetlight.log
-	@echo "--> Done. Saving load data as CSV files and Load profile plot as png"
+	@echo "INFO: STREET LOAD SIMULATION COMPLETE."
 
 #=================================================================================#
 #             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
@@ -144,9 +142,9 @@ streetlight_load:
 
 # if you wish to generate shape files for interactive visualisation on QGIS
 shapefile:
-	@echo "\n### Convert georeferenced csv files to shape files ###"
+	@echo "\n STEP 6: \n Convert Georeferenced csv files to shape files ###"
 	@if [ -e $(LINES_CSV) ]; then python create_shapefile.py; fi
-
+	@echo "INFO: HIGHWAYS SHAPE FILE CREATED."
 
 #=================================================================================#
 #              DROPPING                                                           #

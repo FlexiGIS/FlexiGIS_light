@@ -207,16 +207,19 @@ if __name__ == "__main__":
     cur = conn.cursor()
 
     # get higways from lines
+    print("  === HIGHWAY LINES ====")
     lines = GetLines()
     data_line = lines.get_line_from_db(cur, conn)
     lines.get_line_features(data_line)
 
     # get highway polygons
+    print("  === HIGHWAY SHAPES ====")
     squares = GetPolygons()
     data_square = squares.get_polygons_from_db(cur, conn)
     squares.get_polygons_features(data_square)
 
     # get highway points
+    print("  === HIGHWAY POINTS ====")
     points = GetPoints()
     data_point = points.get_point_from_db(cur, conn)
     points.get_point_features(data_point)

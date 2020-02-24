@@ -49,11 +49,6 @@ To use the FlexiGIS-Light model download the *FlexiGIS_light* code and data fold
     * │   ├── 03_urban_energy_requirements
     * │   └── 04_Visualisation
     * ├── doc
-    * │   ├── AUTHOR
-    * │   ├── BSD License.pdf
-    * │   ├── COPYING
-    * │   ├── LICENSE
-    * │   ├── README.md
     * └── requirements.txt
 
   
