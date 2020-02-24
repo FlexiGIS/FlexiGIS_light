@@ -1,6 +1,8 @@
 
 # FlexiGIS-Light
 
+[![Documentation Status](https://readthedocs.org/projects/flexigis/badge/?version=latest)](https://flexigis.readthedocs.io/en/latest/?badge=latest)
+
 FlexiGIS-Light is a sub module of FlexiGIS, which is free and open source GIS-based plattform. The extracted urban energy infrustructure are based mainly on OpenStreetMap data.
 
 The OpenStreetMap data is available under the Open Database License (ODbL). A description of the ODbL license is available at the webpage http://opendatacommons.org/licenses/odbl.
@@ -118,11 +120,7 @@ g. `make drop_database`
 3. After running the FlexiGIS-Light model using the makefile, the resulting streetlight load profiles, urban infrastructure data are stored as .csv data in folder *../data/02_urban_output_data* and *../data/03_urban_energy_requirements*.
 
 ## Documentation
-
-*still ongoing*
-
-A detailed documentation of the FlexiGIS code  is available in the user guide (in folder doc).
-The user guide includes detailed information about the FlexiGIS code structure, how to run the FlexiGIS model. Moreover, the user guide includes information about the simplifications and assumptions of the FlexiGIS model as well as information about how the OSM data are used.
+A see [here](https://flexigis.readthedocs.io/en/latest/) for detailed documentations of FlexiGIS.
 
 ## Help
 
