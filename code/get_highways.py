@@ -148,10 +148,8 @@ class GetPolygons:
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_polygons = self.dataset.set_index(["highway"])
-
         return data_to_csv(self.new_data_polygons,
                            destination+self.table+".csv")
-
         logging.info("csv file for polygons generated.")
 
 
