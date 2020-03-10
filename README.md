@@ -120,7 +120,7 @@ g. `make drop_database`
 3. After running the FlexiGIS-Light model using the makefile, the resulting streetlight load profiles, urban infrastructure data are stored as .csv data in folder *../data/02_urban_output_data* and *../data/03_urban_energy_requirements*.
 
 ## Documentation
-A see [here](https://flexigis.readthedocs.io/en/latest/) for detailed documentations of FlexiGIS.
+See [here](https://flexigis.readthedocs.io/en/latest/) for detailed documentations of FlexiGIS.
 
 ## Help
 
