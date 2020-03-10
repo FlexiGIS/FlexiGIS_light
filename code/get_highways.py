@@ -7,7 +7,8 @@ from db_connect import dbconn_from_args
 import logging
 import os
 from pathlib import Path
-
+from shapely import wkt
+from geopandas import GeoDataFrame
 
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="../code/log/flexigis_highways.log",
@@ -43,7 +44,7 @@ def compute_area(dataset, width):
     return dataset_new
 
 
-def data_to_csv(dataset, name="name"):
+def data_to_file(dataset, name="name"):
     """Write data to csv file.
 
     dataset: dataframe object
@@ -53,7 +54,10 @@ def data_to_csv(dataset, name="name"):
     dataset["polygon"] = dataset_new[1]
     dataset = dataset.drop(columns=["geometry"])
     dataset = dataset.rename(columns={"polygon": "geometry"})
-    return dataset.to_csv(name, encoding="utf-8")
+    dataset["geometry"] = dataset["geometry"].apply(wkt.loads)
+    gdf = GeoDataFrame(dataset, geometry="geometry")
+    gdf.to_file(driver='ESRI Shapefile', filename=name)
+    # dataset.to_csv(name, encoding="utf-8")
 
 
 class GetLines:
@@ -106,7 +110,8 @@ class GetLines:
         self._width_ = dict(zip(self.highway_feature, self.width))
         # compute area and save data to csv
         new_data = compute_area(self.new_data_, self._width_)
-        return data_to_csv(new_data, destination+self.table+".csv")
+        data_to_file(new_data, destination+self.table)
+        # return data_to_file(new_data, destination+self.table+".csv")
         logging.info("csv file of line properties generated.")
 
 
@@ -149,8 +154,8 @@ class GetPolygons:
                                    isin(self.highway_feature)]
         self.new_data_polygons = self.dataset.set_index(["highway"])
 
-        return data_to_csv(self.new_data_polygons,
-                           destination+self.table+".csv")
+        return data_to_file(self.new_data_polygons,
+                            destination+self.table)
 
         logging.info("csv file for polygons generated.")
 
@@ -196,8 +201,8 @@ class GetPoints:
                                    isin(self.highway_feature)]
         self.new_data_points = self.dataset.set_index(["highway"])
 
-        return data_to_csv(self.new_data_points,
-                           destination+self.table+".csv")
+        return data_to_file(self.new_data_points,
+                            destination+self.table)
 
         logging.info("csv file for points generated.")
 

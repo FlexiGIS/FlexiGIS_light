@@ -43,9 +43,9 @@ include $(config)
 #              Output Files                                                       #
 #=================================================================================#
 
-LINES_CSV:= $(urban_output)/planet_osm_line.csv
-POLYGONS_CSV:= $(urban_output)/planet_osm_polygon.csv
-POINT_CSV:= $(urban_output)/planet_osm_point.csv
+LINES_CSV:= $(urban_output)/planet_osm_line/planet_osm_line.shp
+POLYGONS_CSV:= $(urban_output)/planet_osm_polygon/planet_osm_polygon.shp
+POINT_CSV:= $(urban_output)/planet_osm_point/planet_osm_point.shp
 #=================================================================================#
 #              Definition of tasks                                                #
 #=================================================================================#
@@ -135,16 +135,6 @@ streetlight_load:
 	@if [ -e $(LINES_CSV) ]; then python street_scenarios.py ; fi
 	@echo "streetlight energy modelling done." >> log/streetlight.log
 	@echo "INFO: STREET LOAD SIMULATION COMPLETE."
-
-#=================================================================================#
-#             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
-#=================================================================================#
-
-# if you wish to generate shape files for interactive visualisation on QGIS
-shapefile:
-	@echo "\n STEP 6: \n Convert Georeferenced csv files to shape files ###"
-	@if [ -e $(LINES_CSV) ]; then python create_shapefile.py; fi
-	@echo "INFO: HIGHWAYS SHAPE FILE CREATED."
 
 #=================================================================================#
 #              DROPPING                                                           #

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import logging
 import os
 from pathlib import Path
+import geopandas as gpd
 
 
 class simulateStreetLight(object):
@@ -69,9 +70,9 @@ class simulateStreetLight(object):
         """Simulate quarter load."""
         print('INFO: Simulate Street Light For Every 15mins')
         # get planet OSM data for highway (line and polygon)
-        self.osmLines = pd.read_csv(self.input_path2+'planet_osm_line.csv')
-        self.osmSquares = pd.read_csv(self.input_path2 +
-                                      'planet_osm_polygon.csv')
+        self.osmLines = gpd.read_file(self.input_path2+'planet_osm_line/planet_osm_line.shp')
+        self.osmSquares = gpd.read_file(self.input_path2 +
+                                        'planet_osm_polygon/planet_osm_polygon.shp')
         self.osmData = pd.concat([self.osmLines.loc[:, ["highway", "area"]],
                                   self.osmSquares.loc[:, ["highway", "area"]]],
                                  ignore_index=True)
