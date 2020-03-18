@@ -53,7 +53,7 @@ def data_to_csv(dataset, name="name"):
     dataset["polygon"] = dataset_new[1]
     dataset = dataset.drop(columns=["geometry"])
     dataset = dataset.rename(columns={"polygon": "geometry"})
-    return dataset.to_csv(name, encoding="utf-8")
+    dataset.to_csv(name, encoding="utf-8")
 
 
 class GetLines:
@@ -106,7 +106,7 @@ class GetLines:
         self._width_ = dict(zip(self.highway_feature, self.width))
         # compute area and save data to csv
         new_data = compute_area(self.new_data_, self._width_)
-        return data_to_csv(new_data, destination+self.table+".csv")
+        data_to_csv(new_data, destination+self.table+".csv")
         logging.info("csv file of line properties generated.")
 
 
@@ -136,8 +136,8 @@ class GetPolygons:
             "osm_id", self.ways_column,
             "area", "geometry"])
         self.data = self.df.dropna().sort_values(by="highway")
-        return self.data
         logging.info("polygon properties for highway extracted from database.")
+        return self.data
     # get features from dataframe
 
     def get_polygons_features(self, dataset):
@@ -148,10 +148,7 @@ class GetPolygons:
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_polygons = self.dataset.set_index(["highway"])
-
-        return data_to_csv(self.new_data_polygons,
-                           destination+self.table+".csv")
-
+        data_to_csv(self.new_data_polygons, destination+self.table+".csv")
         logging.info("csv file for polygons generated.")
 
 
@@ -182,8 +179,8 @@ class GetPoints:
         self.df = pd.DataFrame(self.rows, columns=[
             "osm_id", self.ways_column, "geometry", "Longitude", "Latitude"])
         self.data = self.df.dropna().sort_values(by="highway")
-        return self.data
         logging.info("node properties for highway extracted from database.")
+        return self.data
     # get features from dataframe
 
     def get_point_features(self, dataset):
@@ -195,10 +192,7 @@ class GetPoints:
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_points = self.dataset.set_index(["highway"])
-
-        return data_to_csv(self.new_data_points,
-                           destination+self.table+".csv")
-
+        data_to_csv(self.new_data_points, destination+self.table+".csv")
         logging.info("csv file for points generated.")
 
 

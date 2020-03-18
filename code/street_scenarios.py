@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 
 
-class simulateStreetLight(object):
+class simulateStreetLight:
     """Simulate street light Electricity demand."""
 
     def configuration(self):
@@ -36,8 +36,8 @@ class simulateStreetLight(object):
         self.soda = pd.read_csv(self.input_path +
                                 '170906_Osternburg-SoDa.csv',
                                 encoding="ISO-8859-1", delimiter=',')
+        logging.info('read Soda csv file.')
         return self.soda
-        logging.info('Soda csv file read.')
 
 # Standardload=True
     def get_standardLoad(self):
@@ -133,8 +133,8 @@ class simulateStreetLight(object):
 
         logging.info("Street. quarter hourly ERs simulated.")
 
-    def simulateStreetLight(self, soda=False, Standardload=True, EUIx=True,
-                            sl=True):
+    def simulate_Street_Light(self, soda=False, Standardload=True, EUIx=True,
+                              sl=True):
         """Trigger methods for street light simulation."""
         self.configuration()
         if soda:
@@ -148,9 +148,9 @@ class simulateStreetLight(object):
 
         if sl:
             self.simulateLoadAllRoad()
-        self.plotLoadScenario()
+            self.plotLoadScenario()
 
 
 if __name__ == "__main__":
     streelight_simulation = simulateStreetLight()
-    streelight_simulation.simulateStreetLight()
+    streelight_simulation.simulate_Street_Light()
