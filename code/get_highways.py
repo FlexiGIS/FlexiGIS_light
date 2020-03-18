@@ -141,8 +141,8 @@ class GetPolygons:
             "osm_id", self.ways_column,
             "area", "geometry"])
         self.data = self.df.dropna().sort_values(by="highway")
-        return self.data
         logging.info("polygon properties for highway extracted from database.")
+        return self.data
     # get features from dataframe
 
     def get_polygons_features(self, dataset):
@@ -153,11 +153,8 @@ class GetPolygons:
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_polygons = self.dataset.set_index(["highway"])
-
-        return data_to_file(self.new_data_polygons,
-                            destination+self.table)
-
-        logging.info("csv file for polygons generated.")
+        data_to_file(self.new_data_polygons, destination+self.table)
+        logging.info("file for polygons generated.")
 
 
 class GetPoints:
@@ -187,8 +184,9 @@ class GetPoints:
         self.df = pd.DataFrame(self.rows, columns=[
             "osm_id", self.ways_column, "geometry", "Longitude", "Latitude"])
         self.data = self.df.dropna().sort_values(by="highway")
-        return self.data
         logging.info("node properties for highway extracted from database.")
+
+        return self.data
     # get features from dataframe
 
     def get_point_features(self, dataset):
@@ -200,10 +198,8 @@ class GetPoints:
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_points = self.dataset.set_index(["highway"])
-
-        return data_to_file(self.new_data_points,
-                            destination+self.table)
-
+        data_to_file(self.new_data_points,
+                     destination+self.table)
         logging.info("csv file for points generated.")
 
 

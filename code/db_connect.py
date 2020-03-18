@@ -5,12 +5,14 @@ import optparse
 import psycopg2
 
 
-def dbconn_from_args(argv=sys.argv[1:], environ=os.environ):
+def dbconn_from_args():
     """Get database connection from command-line arguments.
 
     or environment variables. Reuse environment variables from libpq/psql
     (see http://www.postgresql.org/docs/9.1/static/libpq-envars.html)
     """
+    argv = sys.argv[1:]
+    environ = os.environ
     parser = optparse.OptionParser()
     parser.add_option("-D", "--dbname", action="store", dest="dbname",
                       help="database name of the topology network")
@@ -50,3 +52,7 @@ def dbconn_from_args(argv=sys.argv[1:], environ=os.environ):
         if len(argv) == 0 or len(args) == len(argv):
             parser.print_help()
         raise e
+
+
+if __name__ == "__main__":
+    print("This module is a helper function that automate database login.")
