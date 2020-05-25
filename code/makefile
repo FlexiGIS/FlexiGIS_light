@@ -136,7 +136,7 @@ abstract_data:
 
 # Step5: Modelling urban energy requirements
 streetlight_load:
-	@echo "\n STEP 5: \n Modelling Streetlight Load and saving utput as csv file to folder '$(load_folder)':"
+	@echo "\n STEP 5: \n Modelling Streetlight Load and saving output as csv file to folder '$(load_folder)':"
 	@date >> log/streetlight.log
 	@if [ -e $(LINES_CSV) ]; then python street_scenarios.py ; fi
 	@echo "streetlight energy modelling done." >> log/streetlight.log
