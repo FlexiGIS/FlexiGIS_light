@@ -5,12 +5,6 @@
 
 FlexiGIS-Light is a sub module of FlexiGIS, which is free and open source GIS-based plattform. The extracted urban energy infrustructure are based mainly on OpenStreetMap data.
 
-The OpenStreetMap data is available under the Open Database License (ODbL). A description of the ODbL license is available at the webpage http://opendatacommons.org/licenses/odbl.
-OpenStreetMap cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit the link http://www.openstreetmap.org/copyright. The OpenStreetMap data distributed is available under the Open Database License ODbL. For more information, please visit the OpenStreetMap web page openstreetmap.org.
-The datasets can be redistributed and/or modified resulted by FlexiGIS under the same licenses and copyright.
-
-The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License". Redistribution and use in source and binary forms, with or without modification, are permitted. For more information concerning the BSD-3C and the description of the terms under which you can use the FlexiGIS code, please visit https://opensource.org/licenses/BSD-3-Clause.
-
 Model I.
 ![FlexiGIS Buildings](data/04_Visualisation/roads.png)
 
@@ -57,23 +51,22 @@ To use the FlexiGIS-Light model download the *FlexiGIS_light* code and data fold
 ## Installation
 After making sure all system requirements are satisfied, create a Python virtual environment where the required python dependencies can be installed using pip. Python virtual
 environment can be created by following the steps from https://packaging.python.org/tutorials/installing-packages/ . After creating a python virtual environment, install
-the required python dependencies by running:
+the required python dependencies by running the following command on the terminal:
 
-activate the virtual environment
+first activate the installed python virtual environment
 
-```
-source virtual_env_name/bin/activate
+```console
+user@terminal:~$ source virtual_env_name/bin/activate
 ```
 cd into the unzipped or cloned FlexiGIS directory
 
+```console
+(virtual_env_name) user@terminal:~$ cd ../FlexiGIS_light
 ```
-cd ../FlexiGIS_light
-```
+install the python dependencies/requirements needed to run FlexiGIS_light
 
-install requirements
-
-```
-pip install -r requirements.txt
+```console
+(virtual_env_name) user@terminal:~$ pip install -r requirements.txt
 ```
 
 #### FlexiGIS directory description
@@ -87,7 +80,7 @@ The folder *01_raw_input_data* contains the file Berlin.poly, which is used when
 
 Urban style data "urban.style", Weather data "weather-data.csv", Standard load profile data "SLP.csv" which are all input data are also saved in the *01_raw_input_data* directory.
 
-The resulting abstracted urban infrastructure based on landuse in this case highway: point (e.g street light), line (e.g motorway), and polygons (e.g roundabouts) are extracted and saved as csv data files in the *02_urban_output_data* directory.
+The resulting abstracted urban infrastructures based on landuse in this case highway: point (e.g street light), line (e.g motorway), and polygons (e.g roundabouts) are extracted and saved as csv data files in the *02_urban_output_data* directory.
 
 In *03_urban_energy_requirements* directory, the calculated streetlight load timeseries for the urban infrastructure is stored as a csv. Plots of the abstracted urban infrastructure and load timeseries are saved in folder *04_visualization*.
 
@@ -103,41 +96,37 @@ To run FlexiGIS execute the following steps:
 
 The available makefile options are:
 
-a. `make all`
+a. `(_env_name) user@terminal:~/FlexiGIS-light/code$ make all`
 
-b. `make download`
+b. `(_env_name) user@terminal:~/FlexiGIS-light/code$ make download`
 
-c. `make filter_data`
+c. `(_env_name) user@terminal:~/FlexiGIS-light/code$ make filter_data`
 
-d. `make export_data`
+d. `(_env_name) user@terminal:~/FlexiGIS-light/code$ make export_data`
 
-e. `make abstract_data`
+e. `(_env_name) user@terminal:~/FlexiGIS-light/code$ make abstract_data`
 
-f. `make streetlight_load`
+f. `(_env_name) user@terminal:~/FlexiGIS-light/code$ make streetlight_load`
 
-g. `make drop_database`
+g. `(_env_name) user@terminal:~/FlexiGIS-light/code$ make drop_database`
 
 3. After running the FlexiGIS-Light model using the makefile, the resulting streetlight load profiles, urban infrastructure data are stored as .csv data in folder *../data/02_urban_output_data* and *../data/03_urban_energy_requirements*.
 
 ## Documentation
 See [here](https://flexigis.readthedocs.io/en/latest/) for detailed documentations of FlexiGIS.
 
-## Help
+## License
 
-In case of any questions, comments or suggestions please do not hesitate to contact us by email via developers(at)FlexiGIS.de.
+The FlexiGIS code is licensed under the BSD-3-Clause, "New BSD License" or "Modified BSD License". Redistribution and use in source and binary forms, with or without modification, are permitted. For more information concerning the BSD-3C and the description of the terms under which you can use the FlexiGIS code, please visit https://opensource.org/licenses/BSD-3-Clause.
 
-If you would like to be informed about developments from within the project and the availability of new software and releases please register for our newsletter by sending an email to:
-news-subscribe(at)FlexiGIS.de.
-
-## Contributors
-Project team:
-
-Dr. Wided Medjroubi (project leader)
-
-Dr. Alaa Alhamwi (FlexiGIS author)
-
-MSc. Chinonso C. Unaichi
+The OpenStreetMap data is available under the Open Database License (ODbL). A description of the ODbL license is available at the webpage http://opendatacommons.org/licenses/odbl.
+OpenStreetMap cartography is licensed as CC BY-SA. For more information on the copyright of OpenStreetMap please visit the link http://www.openstreetmap.org/copyright. The OpenStreetMap data distributed is available under the Open Database License ODbL. For more information, please visit the OpenStreetMap web page openstreetmap.org.
+The datasets can be redistributed and/or modified resulted by FlexiGIS under the same licenses and copyright.
 
 ## Contact
+Author: Alaa Alhamwi
+*email: alaa.alhamwi@dlr.de*
 
-*Contact email: developers(at)FlexiGIS.de.*
+## Contributors
+
+Project team: Dr. Wided Medjroubi (project leader), Dr. Alaa Alhamwi (FlexiGIS author), MSc. Chinonso C. Unaichi

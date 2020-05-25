@@ -9,6 +9,9 @@ import pandas as pd
 import json
 from shapely import wkt
 import geopandas
+import time
+import os
+from pathlib import Path
 
 
 def compute_area(dataset, width):
@@ -30,9 +33,10 @@ def compute_area(dataset, width):
     return dataset_new
 
 
-def esyShape(osm_File_Name="02-UrbanInfrastructure.osm.pbf"):
+def esyShape(osm_File_Name="berlin-latest.osm.pbf"):
     """Get highway shapely object from esy_osm_shape."""
     print("Getting Highway Shapely Object From esy-osm-shape")
+    t1 = time.time()
     datapath = "../data/input_raw_data/"
     data = datapath+osm_File_Name
     shape_ = esys.Shape(data)
@@ -43,12 +47,20 @@ def esyShape(osm_File_Name="02-UrbanInfrastructure.osm.pbf"):
             (type(e) is not esy.osm.pbf.Relation or 'multipolygon' in e.tags))
         if obj is not None
     ]
+    t2 = time.time()
+    total_time = round(t2-t1)
+    print("INFO: Elapsed time = %ss" % (total_time))
     return highway
 
 
 def esyPoints(highway, outdir="../data/output_data/"):
     """Get osm points from highway tags."""
     print("Getting Points From Highway Shapely Object")
+    if Path(outdir).exists():
+
+        pass
+    else:
+        os.mkdir(outdir)
     highway_point = [s for s in highway if type(s) is shg.Point]
     _points_ = {'bus_stop', 'crossing', 'give_way',
                 'motorwyay_junction', 'passing_place',
@@ -89,9 +101,9 @@ def esyPoints(highway, outdir="../data/output_data/"):
     geodata_points.crs = {'init': 'epsg:4326'}
     geodata_points = geodata_points.to_crs({'init': 'epsg:3857'})
     # geodata_points.to_file(outdir+"osm_points.geojson", driver='GeoJSON')
+    print(geodata_points.info())
     geodata_points.to_file(driver='ESRI Shapefile',
                            filename=outdir+"osm_points")
-    print(geodata_points.info())
     # return geodata_points
 
 
@@ -144,9 +156,10 @@ def esyLines(highway, outdir="../data/output_data/"):
     # compute highway tags area based on their width
     geodata_lines = compute_area(geodata_lines, street_widthmap)
     # geodata_lines.to_file(outdir+"osm_lines.geojson", driver='GeoJSON')
+    print(geodata_lines.info())
+    print(geodata_lines.groupby("highway").sum())
     geodata_lines.to_file(driver='ESRI Shapefile',
                           filename=outdir+"osm_lines")
-    print(geodata_lines.info())
 
 
 def esyPolygons(highway, outdir="../data/output_data/"):
@@ -192,10 +205,9 @@ def esyPolygons(highway, outdir="../data/output_data/"):
     geodata_polys = geodata_polys.to_crs({'init': 'epsg:3857'})
     geodata_polys["area"] = geodata_polys.geometry.area
     # geodata_polys.to_file(outdir+"osm_poly.geojson", driver='GeoJSON')
+    print(geodata_polys.info())
     geodata_polys.to_file(driver='ESRI Shapefile',
                           filename=outdir+"osm_poly")
-
-    print(geodata_polys.info())
 
 
 if __name__ == "__main__":
@@ -204,13 +216,12 @@ if __name__ == "__main__":
     print("============================")
     print(" --- Highway Points --- ")
     print("============================")
-
+    t1 = time.time()
     esyPoints(highway)
 
     print("============================")
     print(" --- Highway Lines --- ")
     print("============================")
-
     esyLines(highway)
 
     print("============================")
@@ -218,3 +229,6 @@ if __name__ == "__main__":
     print("============================")
 
     esyPolygons(highway)
+    t2 = time.time()
+    total_time = round(t2-t1)
+    print("INFO: Elapsed time = %ss" % (total_time))

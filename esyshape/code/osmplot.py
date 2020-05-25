@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import geopandas as gpd
 import pandas as pd
+import time
 
 
 def plot_line_poly(indir, legend_box, font_size,
@@ -45,6 +46,7 @@ def plot_point(indir, legend_box, font_size,
 
 
 if __name__ == "__main__":
+    t1 = time.time()
     indir = "../data/output_data/"
     outdir = "../data/output_data/"
     font_size = 15
@@ -57,3 +59,6 @@ if __name__ == "__main__":
     print(" == Plot Of Highway Points ==")
     plot_point(indir, legend_box, font_size,
                fig_size, face_color)
+    t2 = time.time()
+    total_time = round(t2-t1)
+    print("INFO: Elapsed time = %ss" % (total_time))

@@ -58,8 +58,7 @@ all: download pbf_data filter streetlight osm_plot
 #=================================================================================#
 # Step1: Download the OSM raw geo urban data.
 download:
-	@echo "\nSTEP 1 \n:"
-	@echo "INFO: DOWNLOAD OSM PBF"
+	@echo "\nSTEP 1 \nINFO: DOWNLOAD OSM PBF"
 	wget -nv -O $(OSM_raw_data) $(OSM_raw_data_URL)
 	@echo "INFO: OSM DATA DOWNLOAD DONE."
 
@@ -67,8 +66,7 @@ download:
 #              GET BOUNDING REGION USING POLY FILE                                #
 #=================================================================================#
 pbf_data:
-	@echo "\nSTEP 2 \n:"
-	@echo "INFO: FILTER PBF FILE WITH BOUNDING POLY FILE"
+	@echo "\nSTEP 2 \nINFO: FILTER PBF FILE WITH BOUNDING POLY FILE"
 	osmosis \
 	--read-pbf file=$(OSM_raw_data) \
 	--bounding-polygon file=$(polyfile) \
@@ -81,8 +79,7 @@ pbf_data:
 #=================================================================================#
 # Step3: Export to esy-OSM filter.
 filter:
-	@echo "\nSTEP 3 \n:"
-	@echo "INFO: FILTER URBAN INFRASTRUCTURE PBF FILE USING: esy-osm-shape"
+	@echo "\nSTEP 3 \nINFO: FILTER URBAN INFRASTRUCTURE PBF FILE USING: esy-osm-shape"
 	@ if [ -e $(OSM_merged_data) ]; then python esy_shape.py; fi
 	@echo "INFO: HIGHWAY FILTERING DONE"
 
@@ -99,6 +96,5 @@ streetlight:
 #              OSM DATA PLOT		                        					  #
 #=================================================================================#
 osm_plot:
-	@echo "\nSTEP 4  \n:"
-	@echo "INFO: PLOT OSM DATA "
+	@echo "\nSTEP 4 \nINFO: PLOT OSM Data"
 	@ if [ -e $(urban_output) ]; then python osmplot.py ; fi

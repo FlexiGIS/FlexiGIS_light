@@ -1,6 +1,6 @@
 """Get Highway data from lines, polygons and points table in database.
 
-and returns csv files for each.
+and returns shape files for each.
 """
 import pandas as pd
 from db_connect import dbconn_from_args
@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 from shapely import wkt
 from geopandas import GeoDataFrame
+import time
 
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="../code/log/flexigis_highways.log",
@@ -45,10 +46,10 @@ def compute_area(dataset, width):
 
 
 def data_to_file(dataset, name="name"):
-    """Write data to csv file.
+    """Write data to csv/shape file.
 
     dataset: dataframe object
-    name: str object, name of the output csv file (the table name).
+    name: str object, name of the output shape file (the table name).
     """
     dataset_new = dataset["geometry"].str.split(";", n=1, expand=True)
     dataset["polygon"] = dataset_new[1]
@@ -61,11 +62,11 @@ def data_to_file(dataset, name="name"):
 
 
 class GetLines:
-    """Object class that gets data from database and export output to csv.
+    """Object class that gets data from database and export output to shapefile.
 
     get_line_from_db: returns querried database table as pandas dataframe.
     get_line_features: gets highway categories(lines), calculate thier area and
-    returns dataset as csv file.
+    returns dataset as shp file.
     """
 
     def get_line_from_db(self, cur, conn):
@@ -96,7 +97,7 @@ class GetLines:
 
     # get features from dataframe
     def get_line_features(self, dataset):
-        """Get OSM High way features."""
+        """Get OSM Highway features."""
         self.highway_feature = ['living_street', 'motorway', 'pedestrian',
                                 'primary', 'secondary', 'service', 'tertiary',
                                 'trunk', 'motorway_link', 'primary_link',
@@ -109,17 +110,19 @@ class GetLines:
         self.new_data_ = self.dataset.set_index(["highway"])
         self._width_ = dict(zip(self.highway_feature, self.width))
         # compute area and save data to csv
-        new_data = compute_area(self.new_data_, self._width_)
-        data_to_file(new_data, destination+self.table)
+        self.new_data_lines = compute_area(self.new_data_, self._width_)
+        print(self.new_data_lines.info())
+        # print(self.new_data_lines.groupby("highway").sum())
+        data_to_file(self.new_data_lines, destination+self.table)
         # return data_to_file(new_data, destination+self.table+".csv")
-        logging.info("csv file of line properties generated.")
+        logging.info("shape file of line features generated.")
 
 
 class GetPolygons:
-    """Gets highway polygons from database and export output to csv.
+    """Gets highway polygons from database and export output to shape.
 
     get_polygons_from_db: returns querried database table as pandas dataframe.
-    get_polygons_features: returns csv file of highway categories(polygons).
+    get_polygons_features: returns shape file of highway categories(polygons).
     """
 
     def get_polygons_from_db(self, cur, conn):
@@ -146,25 +149,23 @@ class GetPolygons:
     # get features from dataframe
 
     def get_polygons_features(self, dataset):
-        """Get OSM High way features."""
+        """Get OSM Highway features."""
         self.highway_feature = ['crossing', 'footway', 'living_street',
                                 'pedestrian', 'platform', 'residential',
                                 'service', 'traffic_island']
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_polygons = self.dataset.set_index(["highway"])
-
-        return data_to_file(self.new_data_polygons,
-                            destination+self.table)
-
-        logging.info("csv file for polygons generated.")
+        print(self.new_data_polygons.info())
+        data_to_file(self.new_data_polygons, destination+self.table)
+        logging.info("shape file for polygons generated.")
 
 
 class GetPoints:
-    """Gets highway points(Nodes) from database and export output to csv.
+    """Gets highway points(Nodes) from database and export output to shape file.
 
     get_point_from_db: returns querried database table as pandas dataframe.
-    get_point_features: returns csv file of highway categories(points)
+    get_point_features: returns shape file of highway categories(points)
     """
 
     def get_point_from_db(self, cur, conn):
@@ -188,11 +189,11 @@ class GetPoints:
             "osm_id", self.ways_column, "geometry", "Longitude", "Latitude"])
         self.data = self.df.dropna().sort_values(by="highway")
         return self.data
-        logging.info("node properties for highway extracted from database.")
+        logging.info("Node properties for highway extracted from database.")
     # get features from dataframe
 
     def get_point_features(self, dataset):
-        """Get OSM High way features."""
+        """Get OSM Highway features."""
         self.highway_feature = ['bus_stop', 'crossing', 'give_way',
                                 'motorwyay_junction', 'passing_place',
                                 'platform', 'speed_camera', 'stop',
@@ -200,17 +201,15 @@ class GetPoints:
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_points = self.dataset.set_index(["highway"])
-
-        return data_to_file(self.new_data_points,
-                            destination+self.table)
-
-        logging.info("csv file for points generated.")
+        print(self.new_data_points.info())
+        data_to_file(self.new_data_points, destination+self.table)
+        logging.info("shape file for points generated.")
 
 
 if __name__ == "__main__":
     conn = dbconn_from_args()
     cur = conn.cursor()
-
+    t1 = time.time()
     # get higways from lines
     print("  === HIGHWAY LINES ====")
     lines = GetLines()
@@ -228,3 +227,6 @@ if __name__ == "__main__":
     points = GetPoints()
     data_point = points.get_point_from_db(cur, conn)
     points.get_point_features(data_point)
+    t2 = time.time()
+    total_time = round(t2-t1)
+    print("INFO: Elapsed time = %ss" % (total_time))

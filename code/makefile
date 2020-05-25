@@ -46,6 +46,7 @@ include $(config)
 LINES_CSV:= $(urban_output)/planet_osm_line/planet_osm_line.shp
 POLYGONS_CSV:= $(urban_output)/planet_osm_polygon/planet_osm_polygon.shp
 POINT_CSV:= $(urban_output)/planet_osm_point/planet_osm_point.shp
+
 #=================================================================================#
 #              Definition of tasks                                                #
 #=================================================================================#
@@ -58,6 +59,11 @@ POINT_CSV:= $(urban_output)/planet_osm_point/planet_osm_point.shp
 .PHONY: streetlight_load
 .PHONY: shapefile
 .PHONY: drop_database
+.PHONY: weather_data
+.PHONY: feedin_data_format
+.PHONY: feedin
+
+
 
 #=================================================================================#
 #              Environment Variables                                              #
@@ -75,7 +81,7 @@ download:
 	@date >> log/download.log
 	wget -nv -O $(OSM_raw_data) $(OSM_raw_data_URL) >> log/download.log 2>&1
 	@echo "Done. Download OSM raw data" >> log/download.log
-	@echo "--> Done. Download OSM raw data"
+	@echo "INFO: OSM raw data download"
 
 filter_data:
 	@echo "\n STEP 2: \nFILTERING PBF FILE WITH BOUNDING POLY FILE"
@@ -103,7 +109,7 @@ export_data:
 	@echo "OSM data export to database done." >> log/database.log
 	@date >> log/osm2pgsql.log
 	#@date >> log/database.log
-	@echo "INFO: GEO-DATA EXPORT TO POSTGRES DATABASE COMPLETE."
+	@echo "INFO: GEO-DATA EXPORT TO POSTGRES DATABASE COMPLETE"
 
 #=================================================================================#
 #              ABSTRACTION AND DATA PROCESSING (HIGHWAY)                          #
@@ -122,7 +128,7 @@ abstract_data:
 	@echo "highway data abstraction done." >> log/abstract.log
 	@if [ -e $(POLYGONS_CSV) ]; then python plot_highway.py ; fi
 	@echo "highway plots generated." >> log/abstract.log
-	@echo "INFO: HIGHWAY GEO_DATA ABSTRACTION COMPLETE."
+	@echo "INFO: HIGHWAY GEO_DATA ABSTRACTION COMPLETE"
 
 #=================================================================================#
 #              MODELLING URBAN ENERGY REQUIREMENT                                 #
@@ -134,14 +140,40 @@ streetlight_load:
 	@date >> log/streetlight.log
 	@if [ -e $(LINES_CSV) ]; then python street_scenarios.py ; fi
 	@echo "streetlight energy modelling done." >> log/streetlight.log
-	@echo "INFO: STREET LOAD SIMULATION COMPLETE."
+	@echo "INFO: STREET LOAD SIMULATION COMPLETE"
 
 #=================================================================================#
 #              DROPPING                                                           #
 #=================================================================================#
-
 # If you wish to drop your database
-
 drop_database:
 	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
 	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi
+
+
+#=================================================================================#
+#              DOWNLOAD ERA5 WEATHER DATA                                         #
+#=================================================================================#
+weather_data:
+	@echo "\n *** Getting ERA5 weather data from Climate Data Store (CDS) ***"
+	@if [ "$(region)" = "True" ]; then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
+	else \
+	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region); fi
+	@echo "INFO: see ../data/01_raw_input_data, for output netcdf"
+
+
+#=================================================================================#
+#              GENERATE WIND AND SOLAR FEEDIN TIMESERIES                          #
+#=================================================================================#
+feedin_data_format:
+	@echo "\n Weather data in Feedinlib format"
+	@if [ -e $(target_file) ]; then python data_format.py $(lon_single_location) $(lat_single_location) $(target_file); fi
+	@echo "INFO: see ../data/01_raw_input_data, for csv files of weather data"
+
+#=================================================================================#
+#              GENERATE WIND AND SOLAR FEEDIN TIMESERIES                          #
+#=================================================================================#
+feedin:
+	@echo "\n Feedin generation from wind and solar"
+	@if [ -e $(target_file) ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
+	@echo "INFO: see ../data/01_raw_input_data, for csv files of output power data"

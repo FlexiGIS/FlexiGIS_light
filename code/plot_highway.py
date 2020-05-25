@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import geopandas as gpd
-
+import time
 
 # def highway_to_geodata(df):
 #     """Convert data from dataframe to geodatframe."""
@@ -89,6 +89,8 @@ def plot_polygon(df_polygon, destination, legend_box, font_size,
 
 
 if __name__ == "__main__":
+    print("INFO: Plotting OSM Data")
+    t1 = time.time()
     # input and output directories
     destination = "../data/04_Visualisation/"
     input_destination = "../data/02_urban_output_data/"
@@ -114,3 +116,6 @@ if __name__ == "__main__":
                fig_size, face_color)
     plot_line_polygon(_data_, destination, legend_box, font_size,
                       fig_size, face_color)
+    t2 = time.time()
+    total_time = round(t2-t1)
+    print("INFO: Elapsed time = %ss" % (total_time))

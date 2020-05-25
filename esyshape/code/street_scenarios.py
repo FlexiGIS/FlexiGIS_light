@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import os
 from pathlib import Path
 import geopandas as gpd
+import time
 
 
 class simulateStreetLight(object):
@@ -24,7 +25,7 @@ class simulateStreetLight(object):
 
 # soda=True
     def get_solarData(self):
-        """Read solar data."""
+        """Read weather data."""
         print("SOLAR DATA")
         self.soda = pd.read_csv(self.input_path +
                                 '170906_Osternburg-SoDa.csv',
@@ -136,9 +137,13 @@ class simulateStreetLight(object):
 
         if sl:
             self.simulateLoadAllRoad()
-        self.plotLoadScenario()
+            self.plotLoadScenario()
 
 
 if __name__ == "__main__":
+    t1 = time.time()
     streelight_simulation = simulateStreetLight()
     streelight_simulation.simulateStreetLight()
+    t2 = time.time()
+    total_time = round(t2-t1)
+    print("INFO: Total simulation time = %ss" % (total_time))

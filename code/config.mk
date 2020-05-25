@@ -64,7 +64,7 @@ osm2pgsql_cache:=6000
 osm2pgsql_num_processes:=1
 
 # 8. PostgreSQL connection parameters:
-#    The database will be created and hold the filtered OSM urban data
+# The database will be created and hold the filtered OSM urban data
 postgres_cluster:=9.1/main
 postgres_database:=esy_Berlin_FlexiGIS_test_cch
 postgres_user:=esa
@@ -73,6 +73,30 @@ postgres_host:=10.160.84.200
 postgres_password:=pg3sa
 
 # 9. Location of the output folders
+input_folder:=../data/01_raw_input_data/
 urban_output:=../data/02_urban_output_data/
 load_folder:=../data/03_urban_energy_requirements/
 visualization_folder:=../data/04_Visualization/
+
+# 10. Weather data and Feedin calculation parameters
+target_file:= ../data/01_raw_input_data/ERA5_data.nc
+start_date:=2018-01-01
+end_date:= 2018-12-31
+
+region:=False #set region to True or False if you which to download weather for a region or for single location
+# For single coordinate
+lon_single_location:=13.1
+lat_single_location:=52.3
+
+# for download of weather data for region (e.g: Berlin region)
+# Longitude 'west'-'East' and Latitude 'North'-'South'
+lon_region:= 13.1,13.6
+lat_region:= 52.3,52.7
+
+turbine_name:= E-101/3050
+hub_height:= 135
+wind_data:= wind_data.csv
+
+pv_panel:= Advent_Solar_Ventura_210___2008_
+inverter_type:= ABB__MICRO_0_25_I_OUTD_US_208__208V_
+solar_data:= solar_data.csv
