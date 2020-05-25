@@ -133,8 +133,8 @@ class simulateStreetLight(object):
 
         logging.info("Street. quarter hourly ERs simulated.")
 
-    def simulateStreetLight(self, soda=False, Standardload=True, EUIx=True,
-                            sl=True):
+    def simulate_StreetLight(self, soda=False, Standardload=True, EUIx=True,
+                             sl=True):
         """Trigger methods for street light simulation."""
         self.configuration()
         if soda:
@@ -153,4 +153,4 @@ class simulateStreetLight(object):
 
 if __name__ == "__main__":
     streelight_simulation = simulateStreetLight()
-    streelight_simulation.simulateStreetLight()
+    streelight_simulation.simulate_StreetLight()
