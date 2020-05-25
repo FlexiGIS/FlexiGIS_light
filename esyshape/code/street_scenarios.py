@@ -7,7 +7,7 @@ import geopandas as gpd
 import time
 
 
-class simulateStreetLight(object):
+class simulateStreetLight:
     """Simulate Street Light Electricity Demand."""
 
     def configuration(self):
@@ -60,7 +60,8 @@ class simulateStreetLight(object):
         """Simulate quarter load."""
         print('INFO: Simulate Street Light For Every 15mins')
         # get planet OSM data for highway (line and polygon)
-        self.osmLines = gpd.read_file(self.input_path2+'osm_lines/osm_lines.shp')
+        self.osmLines = gpd.read_file(
+            self.input_path2+'osm_lines/osm_lines.shp')
         self.osmSquares = gpd.read_file(self.input_path2 +
                                         'osm_poly/osm_poly.shp')
         self.osmData = pd.concat([self.osmLines[["highway", "area"]],
@@ -122,8 +123,8 @@ class simulateStreetLight(object):
                     "load_streetlight_planet_osm_line.png",
                     facecolor=fig.get_facecolor(), dpi=300)
 
-    def simulateStreetLight(self, soda=False, Standardload=True, EUIx=True,
-                            sl=True):
+    def simulate_Street_Light(self, soda=False, Standardload=True, EUIx=True,
+                              sl=True):
         """Trigger methods for street light simulation."""
         self.configuration()
         if soda:

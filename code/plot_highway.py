@@ -7,21 +7,13 @@ import seaborn as sns
 import geopandas as gpd
 import time
 
-# def highway_to_geodata(df):
-#     """Convert data from dataframe to geodatframe."""
-#     df["polygon"] = df["geometry"].apply(wkt.loads)
-#     df = GeoDataFrame(df, geometry='polygon')
-#     df = df.drop(columns=["geometry"])
-#     return df
 
-
-def plot_line_polygon(_data_, destination, legend_box, font_size,
+def plot_line_polygon(data_highway, destination, legend_box, font_size,
                       fig_size, face_color):
     """Plot lines and polygons."""
-    geodata_highway = _data_
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
-    geodata_highway.plot(column='highway', categorical=True, legend=True,
-                         ax=ax, linewidth=1, cmap='tab20', edgecolor="0.8")
+    data_highway.plot(column='highway', categorical=True, legend=True,
+                      ax=ax, linewidth=1, cmap='tab20', edgecolor="0.8")
 
     # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
@@ -36,10 +28,9 @@ def plot_line_polygon(_data_, destination, legend_box, font_size,
 def plot_lines(df_line, destination, legend_box, font_size,
                fig_size, face_color):
     """Plot lines."""
-    geodata_line = df_line
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
-    geodata_line.plot(column='highway', categorical=True, legend=True,
-                      ax=ax, linewidth=1, cmap='tab20', edgecolor="0.8")
+    df_line.plot(column='highway', categorical=True, legend=True,
+                 ax=ax, linewidth=1, cmap='tab20', edgecolor="0.8")
 
     # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
@@ -54,10 +45,9 @@ def plot_lines(df_line, destination, legend_box, font_size,
 def plot_point(df_point, destination, legend_box, font_size,
                fig_size, face_color):
     """Plot points."""
-    geodata_point = df_point
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
-    geodata_point.plot(column='highway', categorical=True, legend=True,
-                       ax=ax, linewidth=1, cmap='Accent', edgecolor="0.8")
+    df_point.plot(column='highway', categorical=True, legend=True,
+                  ax=ax, linewidth=1, cmap='Accent', edgecolor="0.8")
 
     # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
@@ -73,10 +63,9 @@ def plot_polygon(df_polygon, destination, legend_box, font_size,
 
                  fig_size, face_color):
     """Plot polygons."""
-    geodata_polygon = df_polygon
     fig, ax = plt.subplots(1, figsize=fig_size, facecolor=face_color)
-    geodata_polygon.plot(column='highway', categorical=True, legend=True,
-                         ax=ax, linewidth=1, cmap='Dark2', edgecolor="0.8")
+    df_polygon.plot(column='highway', categorical=True, legend=True,
+                    ax=ax, linewidth=1, cmap='Dark2', edgecolor="0.8")
 
     # ax.set_facecolor("whitesmoke")
     leg = ax.get_legend()
@@ -102,8 +91,8 @@ if __name__ == "__main__":
     df_line = gpd.read_file(line_csv)
     df_point = gpd.read_file(point_csv)
     df_polygon = gpd.read_file(polygon_csv)
-    _data_ = pd.concat([df_line.loc[:, ["highway", "geometry"]],
-                        df_polygon.loc[:, ["highway", "geometry"]]])
+    data_higway = pd.concat([df_line.loc[:, ["highway", "geometry"]],
+                             df_polygon.loc[:, ["highway", "geometry"]]])
 
     sns.set_style("dark")
     sns.set_context("notebook", font_scale=0.8, rc={"lines.linewidth": 1.5})
@@ -114,7 +103,7 @@ if __name__ == "__main__":
 
     plot_point(df_point, destination, legend_box, font_size,
                fig_size, face_color)
-    plot_line_polygon(_data_, destination, legend_box, font_size,
+    plot_line_polygon(data_higway, destination, legend_box, font_size,
                       fig_size, face_color)
     t2 = time.time()
     total_time = round(t2-t1)

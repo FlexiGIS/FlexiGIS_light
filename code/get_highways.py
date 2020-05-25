@@ -144,8 +144,8 @@ class GetPolygons:
             "osm_id", self.ways_column,
             "area", "geometry"])
         self.data = self.df.dropna().sort_values(by="highway")
-        return self.data
         logging.info("polygon properties for highway extracted from database.")
+        return self.data
     # get features from dataframe
 
     def get_polygons_features(self, dataset):

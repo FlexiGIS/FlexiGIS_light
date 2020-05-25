@@ -8,7 +8,7 @@ import geopandas as gpd
 import time
 
 
-class simulateStreetLight(object):
+class simulateStreetLight:
     """Simulate street light Electricity demand."""
 
     def configuration(self):
@@ -38,10 +38,11 @@ class simulateStreetLight(object):
         self.soda = pd.read_csv(self.input_path +
                                 '170906_Osternburg-SoDa.csv',
                                 encoding="ISO-8859-1", delimiter=',')
+        logging.info('read Soda csv file.')
         return self.soda
-        logging.info('Soda csv file read.')
 
 # Standardload=True
+
     def get_standardLoad(self):
         """Read standard load profile."""
         print('INFO: Normalise Standard Load Profiles')
@@ -71,7 +72,8 @@ class simulateStreetLight(object):
         """Simulate quarter load."""
         print('INFO: Simulate Street Light For Every 15mins')
         # get planet OSM data for highway (line and polygon)
-        self.osmLines = gpd.read_file(self.input_path2+'planet_osm_line/planet_osm_line.shp')
+        self.osmLines = gpd.read_file(
+            self.input_path2+'planet_osm_line/planet_osm_line.shp')
         self.osmSquares = gpd.read_file(self.input_path2 +
                                         'planet_osm_polygon/planet_osm_polygon.shp')
         self.osmData = pd.concat([self.osmLines.loc[:, ["highway", "area"]],
@@ -134,8 +136,8 @@ class simulateStreetLight(object):
 
         logging.info("Street. quarter hourly ERs simulated.")
 
-    def simulateStreetLight(self, soda=False, Standardload=True, EUIx=True,
-                            sl=True):
+    def simulate_Street_Light(self, soda=False, Standardload=True, EUIx=True,
+                              sl=True):
         """Trigger methods for street light simulation."""
         self.configuration()
         if soda:
