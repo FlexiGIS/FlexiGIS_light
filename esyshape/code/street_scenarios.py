@@ -144,7 +144,7 @@ class simulateStreetLight:
 if __name__ == "__main__":
     t1 = time.time()
     streelight_simulation = simulateStreetLight()
-    streelight_simulation.simulateStreetLight()
+    streelight_simulation.simulate_Street_Light()
     t2 = time.time()
     total_time = round(t2-t1)
     print("INFO: Total simulation time = %ss" % (total_time))
