@@ -46,6 +46,7 @@ include $(config)
 LINES_CSV:= $(urban_output)/planet_osm_line.csv
 POLYGONS_CSV:= $(urban_output)/planet_osm_polygon.csv
 POINT_CSV:= $(urban_output)/planet_osm_point.csv
+COMMODITIES:=$(urban_requirements_dir)/optimization-commodities.csv
 #=================================================================================#
 #              Definition of tasks                                                #
 #=================================================================================#
@@ -61,11 +62,13 @@ POINT_CSV:= $(urban_output)/planet_osm_point.csv
 .PHONY: weather_data
 .PHONY:	feedin_data_format
 .PHONY: feedin
+.PHONY: optimization
+
 #=================================================================================#
 #              Environment Variables                                              #
 #=================================================================================#
 
-all: drop_database download filter_data export_data abstract_data streetlight_load drop_database
+all: drop_database download filter_data export_data abstract_data streetlight_load feedin optimization
 
 #=================================================================================#
 #              DOWNLOAD OSM DATASETS                                              #
@@ -127,6 +130,16 @@ abstract_data:
 	@echo "INFO: HIGHWAY GEO_DATA ABSTRACTION COMPLETE."
 
 #=================================================================================#
+#             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
+#=================================================================================#
+# if you wish to generate shape files for interactive visualisation on QGIS
+shapefile:
+	@echo "\n STEP 6: \n Convert Georeferenced csv files to shape files ###"
+	@if [ -e $(LINES_CSV) ]; then python create_shapefile.py; fi
+	@echo "INFO: HIGHWAYS SHAPE FILE CREATED."
+
+
+#=================================================================================#
 #              MODELLING URBAN ENERGY REQUIREMENT                                 #
 #=================================================================================#
 
@@ -138,34 +151,17 @@ streetlight_load:
 	@echo "streetlight energy modelling done." >> log/streetlight.log
 	@echo "INFO: STREET LOAD SIMULATION COMPLETE."
 
-#=================================================================================#
-#             CREATE SHAPEFILE FROM  GEOREFERENCED CSV FILE                       #
-#=================================================================================#
-
-# if you wish to generate shape files for interactive visualisation on QGIS
-shapefile:
-	@echo "\n STEP 6: \n Convert Georeferenced csv files to shape files ###"
-	@if [ -e $(LINES_CSV) ]; then python create_shapefile.py; fi
-	@echo "INFO: HIGHWAYS SHAPE FILE CREATED."
-
-#=================================================================================#
-#              DROPPING                                                           #
-#=================================================================================#
-
-# If you wish to drop your database
-
-drop_database:
-	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
-	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi
 
 #=================================================================================#
 #              DOWNLOAD ERA5 WEATHER DATA                                         #
 #=================================================================================#
 weather_data:
 	@echo "\n *** Getting ERA5 weather data from Climate Data Store (CDS) ***"
-	@if [ "$(region)" = "True" ]; then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
+	@if [ "$(region)" = "True" ];\
+	then python weather_data.py $(lon_region) $(lat_region) $(target_file) $(start_date) $(end_date) $(region); \
 	else \
-	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region); fi
+	python weather_data.py $(lon_single_location) $(lat_single_location) $(target_file) $(start_date) $(end_date) $(region);\
+	fi
 	@echo "INFO: see ../data/01_raw_input_data, for output netcdf"
 
 
@@ -184,3 +180,18 @@ feedin:
 	@echo "\n Feedin generation from wind and solar"
 	@if [ -e $(target_file) ]; then python feedin.py $(lon_single_location) $(lat_single_location) $(solar_data) $(wind_data) $(turbine_name) $(pv_panel) $(inverter_type) $(hub_height) ; fi
 	@echo "INFO: see ../data/01_raw_input_data, for csv files of output power data"
+
+
+optimization:
+	@echo "\n Optimization of Storage and Supply"
+	@if [ -e $(COMMODITIES) ]; then python optimize.py ; fi
+	@echo "Info: Done!"
+
+
+#=================================================================================#
+#              DROPPING                                                           #
+#=================================================================================#
+# If you wish to drop your database
+drop_database:
+	$(eval answer := $(shell read -r -p "Do you really want to delete the FlexiGIS database '$(postgres_database)'? Type 'yes' or 'y' if you are sure you wish to continue: " ANSWER; echo $$ANSWER))
+	@if [ "$(answer)" = "yes" ] || [ "$(answer)" = "y" ]; then if(dropdb --username=$(postgres_user) --port=$(postgres_port) --host=$(postgres_host) $(postgres_database)); then echo "The FlexiGIS database '$(postgres_database)' has been dropped."; fi else echo "\nDid not drop the FlexiGIS database '$(postgres_database)'."; fi

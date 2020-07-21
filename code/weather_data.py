@@ -16,8 +16,6 @@ from feedinlib import era5
 import xarray as xr
 import sys
 
-weather_dir = "../data/01_raw_input_data/"
-
 
 def get_data(start_date, end_date, lat, lon, target_file, region=True):
     """Get meteorological data from CDS using feedlib.era5 interface."""
@@ -25,7 +23,8 @@ def get_data(start_date, end_date, lat, lon, target_file, region=True):
     if region is True:
         lon = [float(x) for x in list(lon.split(","))]
         lat = [float(x) for x in list(lat.split(","))]
-    else:
+
+    elif region is False:
         lon = float(lon)
         lat = float(lat)
 
@@ -38,6 +37,7 @@ def get_data(start_date, end_date, lat, lon, target_file, region=True):
                                                  target_file=target_file)
     data_meta = xr.open_dataset(target_file)
     print(data_meta)
+    print("Info: Weather data download completed.")
 
 
 if __name__ == "__main__":

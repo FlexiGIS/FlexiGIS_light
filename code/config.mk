@@ -76,14 +76,15 @@ postgres_password:=pg3sa
 urban_output:=../data/02_urban_output_data/
 load_folder:=../data/03_urban_energy_requirements/
 visualization_folder:=../data/04_Visualization/
+urban_requirements_dir:=../data/03_urban_energy_requirements/
 
 # 10. Weather data (25 km x 25 km) and Feedin calculation parameters
 target_file:= ../data/01_raw_input_data/ERA5_data.nc
-start_date:=2018-01-01
-end_date:= 2018-12-31
+start_date:=2015-01-01
+end_date:= 2015-12-31
 
-region:=False #set region to "True" or "False" if you which to download weather for a region or for single location
-# For single coordinate or location single location (e.g single location in  Berlin)
+region:=True #set region to "True" or "False" if you which to download weather for a region or for single location
+# For single coordinate or location (e.g single location in  Berlin)
 lon_single_location:=13.1
 lat_single_location:=52.3
 

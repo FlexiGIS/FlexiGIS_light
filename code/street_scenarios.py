@@ -9,7 +9,7 @@ from pathlib import Path
 class simulateStreetLight:
     """Simulate street light Electricity demand."""
 
-    def configuration(self):
+    def config(self):
         """Generate street light load time series."""
         self.input_path = "../data/01_raw_input_data/"
         self.input_path2 = "../data/02_urban_output_data/"
@@ -29,22 +29,11 @@ class simulateStreetLight:
             logging.info("directory {} succesfully created!.".
                          format("03_urban_energy_requirements"))
 
-# soda=True
-    def get_solarData(self):
-        """Read solar data."""
-        print("SOLAR DATA")
-        self.soda = pd.read_csv(self.input_path +
-                                '170906_Osternburg-SoDa.csv',
-                                encoding="ISO-8859-1", delimiter=',')
-        logging.info('read Soda csv file.')
-        return self.soda
-
-# Standardload=True
     def get_standardLoad(self):
-        """Read standard load profile."""
+        """Get standard load profile."""
         print('INFO: Normalise Standard Load Profiles')
-        self.standardLoad = pd.read_csv(self.input_path+'SLP-2014.csv',
-                                        delimiter=';')
+        self.standardLoad = pd.read_csv(
+            os.path.join(self.input_path, 'SLP.csv'))
 
         # SL1: All urban lights are operated as
         # - evening (16:15) - midnight (00:00) => 'On'
@@ -57,25 +46,24 @@ class simulateStreetLight:
 
         logging.info("Read and normalise Standard Load Profiles.")
 
-# if EUIx=True
     def electricityUsageIndex(self):
         """Calculate electricity Usage Index."""
         print("INFO: Electricity Usage Index kwh/m2 per year")
         self.x_sl = 4 / 1000
         self.timestamp = self.standardLoad['Zeitstempel']
 
-# if sl = True
     def simulateLoadAllRoad(self):
-        """Simulate quarter load."""
-        print('INFO: Simulate Street Light For Every 15mins')
+        """Simulate street lightning demand for different scenarios."""
+        print('INFO: Simulate Street Light load')
         # get planet OSM data for highway (line and polygon)
-        self.osmLines = pd.read_csv(self.input_path2+'planet_osm_line.csv')
-        self.osmSquares = pd.read_csv(self.input_path2 +
-                                      'planet_osm_polygon.csv')
+        self.osmLines = pd.read_csv(os.path.join(
+            self.input_path2, 'planet_osm_line.csv'))
+        self.osmSquares = pd.read_csv(os.path.join(
+            self.input_path2, 'planet_osm_polygon.csv'))
         self.osmData = pd.concat([self.osmLines.loc[:, ["highway", "area"]],
                                   self.osmSquares.loc[:, ["highway", "area"]]],
                                  ignore_index=True)
-        # for sxcenario 1 & 2
+        # for secenario 1 & 2
         self.osmArea = self.osmData["area"].sum()
         # scenario 3 => main roads only for all night
         mainRoads = ['living_street', 'motorway', 'pedestrian', 'primary',
@@ -89,7 +77,8 @@ class simulateStreetLight:
 
 # write calculated street-light load of different scenarios to csv
         _streetLoad_ = []
-        fname = open(self.output_path+"streetlight_load.csv", 'w')
+        fname = open(os.path.join(self.output_path,
+                                  "streetlight_load.csv"), 'w')
         fname.write('TIME;SB1[kWh];SB2[kWh];SB2_mainroad[kWh];SB1_rest[kWh]\n')
         for i, row in self.standardLoad.iterrows():
             row = str(self.timestamp[i]) + ';' + \
@@ -101,32 +90,58 @@ class simulateStreetLight:
         fname.writelines(_streetLoad_)
         fname.close()
 
-# plot scenario SB1
+    def get_feedInData(self):
+        """Get solar data."""
+        # demand and supply
+        pv = pd.read_csv(os.path.join(
+            self.input_path, 'pv_power.csv'), parse_dates=True)
+        wind = pd.read_csv(os.path.join(
+            self.input_path, 'wind_power.csv'), parse_dates=True)
 
+        wind['pv'] = pv['pv']
+        self.feedin = wind
+
+        self.df6 = pd.read_csv(os.path.join(self.output_path, "streetlight_load.csv"),
+                               delimiter=";", index_col='TIME', parse_dates=True)
+        self.df6 = self.df6.iloc[0:8760]  # TODO: fix index
+        self.feedin['demand_SB1'] = self.df6['SB1[kWh]'].values
+        self.feedin['demand_SB2'] = self.df6['SB2[kWh]'].values
+        self.df6['SB2/SB1[kWh]'] = self.df6['SB2_mainroad[kWh]'] + \
+            self. df6['SB1_rest[kWh]']
+        self.feedin['demand_SB2_SB1'] = self.df6['SB2/SB1[kWh]'].values
+        self.feedin.to_csv(os.path.join(
+            self.output_path, 'optimization-commodities.csv'))
+
+    # plot scenario
     def plotLoadScenario(self):
         """Calculate total street-light load and plot sample scenario."""
-        df6 = pd.read_csv(self.output_path+"streetlight_load.csv",
-                          delimiter=";", index_col='TIME', parse_dates=True)
-        totalLoad_SB1 = df6['SB1[kWh]'].sum()
-        totalLoad_SB2 = df6['SB2[kWh]'].sum()
-        totalMainRoadLoad = df6['SB2_mainroad[kWh]'].sum()
-        totalRestLoad_SB2 = df6['SB1_rest[kWh]'].sum()
+        # df6 = pd.read_csv(os.path.join(self.output_path, "streetlight_load.csv"),
+        #                   delimiter=";", index_col='TIME', parse_dates=True)
+        # df6['SB2/SB1[kWh]'] = df6['SB2_mainroad[kWh]'] + df6['SB1_rest[kWh]']
+        totalLoad_SB1 = self.df6['SB1[kWh]'].sum()
+        totalLoad_SB2 = self.df6['SB2[kWh]'].sum()
+        totalLoad_SB2_SB1 = self.df6['SB2/SB1[kWh]'].sum()
         print("INFO: Total Street Light SB1-Load: "+str(totalLoad_SB1)+"kWh")
         print("INFO: Total street light SB2-Load: "+str(totalLoad_SB2)+"kWh")
-        print("INFO: Total Main Roads SB2-load: "+str(totalMainRoadLoad)+"kWh")
-        print("INFO: Total Load Excluding Main-roads SB1: " +
-              str(totalRestLoad_SB2) + "kWh")
+        print("INFO: Total Main Roads SB2-load: "+str(totalLoad_SB2_SB1)+"kWh")
 
         # plot load profile
-        fig, ax = plt.subplots(1, figsize=(8, 4), facecolor='whitesmoke')
-        df6 = df6[["SB1[kWh]"]]
-        df6["2014-01-01":"2014-01-15"].\
-            plot(ax=ax, legend=False, color="royalblue",
-                 title="Street-lighting load time-series")
+        fig, ax = plt.subplots(1, figsize=(6, 4), facecolor='whitesmoke')
+        df6 = self.df6[['SB1[kWh]', 'SB2[kWh]', 'SB2/SB1[kWh]']]
+        df6["2014-01-01":"2014-01-03"].plot(ax=ax, legend=True)
 
         ax.set_facecolor("whitesmoke")
-        plt.xlabel("Time [15 min.]")
+        box = ax.get_position()
+        ax.set_position([box.x0, box.y0 + box.height * 0.1,
+                         box.width, box.height * 0.9])
+
+        # Put a legend below current axis
+        ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
+                  fancybox=True, shadow=True, ncol=5)
+
+        plt.xlabel("Time [Hour]")
         plt.ylabel("Load [kWh]")
+        plt.title("Street lighting demand profiles")
         plt.savefig(self.output_path_fig +
                     "load_streetlight_planet_osm_line.png",
                     facecolor=fig.get_facecolor(), dpi=300)
@@ -135,20 +150,13 @@ class simulateStreetLight:
 
     def simulate_StreetLight(self, soda=False, Standardload=True, EUIx=True,
                              sl=True):
-        """Trigger methods for street light simulation."""
-        self.configuration()
-        if soda:
-            self.get_solarData()
-
-        if Standardload:
-            self.get_standardLoad()
-
-        if EUIx:
-            self.electricityUsageIndex()
-
-        if sl:
-            self.simulateLoadAllRoad()
-            self.plotLoadScenario()
+        """Trigger all methods for street light simulation."""
+        self.config()
+        self.get_feedInData()
+        self.get_standardLoad()
+        self.electricityUsageIndex()
+        self.simulateLoadAllRoad()
+        self.plotLoadScenario()
 
 
 if __name__ == "__main__":

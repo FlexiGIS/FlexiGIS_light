@@ -5,6 +5,7 @@ that Feedinlib understands.
 """
 from feedinlib import era5
 import sys
+import os
 
 weather_dir = "../data/01_raw_input_data/"
 
@@ -17,8 +18,7 @@ def feedin_solarFormat(lon, lat, target_file, to_csv=False):
     print(pv_data.head(5))
 
     if to_csv:
-        pv_data.to_csv(weather_dir+"solar_data.csv")
-    # return pv_data
+        pv_data.to_csv(os.path.join(weather_dir, "solar_data.csv"))
 
 
 def feedin_windFormat(lon, lat, target_file, to_csv=False):
@@ -29,8 +29,7 @@ def feedin_windFormat(lon, lat, target_file, to_csv=False):
     print(wind_data.head(5))
 
     if to_csv:
-        wind_data.to_csv(weather_dir+"wind_data.csv")
-    # return wind_data
+        wind_data.to_csv(os.path.join(weather_dir, "wind_data.csv"))
 
 
 if __name__ == "__main__":
