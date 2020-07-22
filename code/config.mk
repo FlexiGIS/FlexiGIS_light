@@ -83,7 +83,7 @@ target_file:= ../data/01_raw_input_data/ERA5_data.nc
 start_date:=2015-01-01
 end_date:= 2015-12-31
 
-region:=True #set region to "True" or "False" if you which to download weather for a region or for single location
+region:= 1 #set region to 1 or 0, if you wish to download weather for a region or for single location
 # For single coordinate or location (e.g single location in  Berlin)
 lon_single_location:=13.1
 lat_single_location:=52.3
