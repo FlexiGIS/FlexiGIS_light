@@ -108,16 +108,13 @@ class simulateStreetLight:
         self.feedin['demand_SB2'] = self.df6['SB2[kWh]'].values
         self.df6['SB2/SB1[kWh]'] = self.df6['SB2_mainroad[kWh]'] + \
             self. df6['SB1_rest[kWh]']
-        self.feedin['demand_SB2_SB1'] = self.df6['SB2/SB1[kWh]'].values
+        self.feedin['demand_SB2_SB1'] = self.df6['mix[kWh]'].values
         self.feedin.to_csv(os.path.join(
             self.output_path, 'optimization-commodities.csv'))
 
     # plot scenario
     def plotLoadScenario(self):
         """Calculate total street-light load and plot sample scenario."""
-        # df6 = pd.read_csv(os.path.join(self.output_path, "streetlight_load.csv"),
-        #                   delimiter=";", index_col='TIME', parse_dates=True)
-        # df6['SB2/SB1[kWh]'] = df6['SB2_mainroad[kWh]'] + df6['SB1_rest[kWh]']
         totalLoad_SB1 = self.df6['SB1[kWh]'].sum()
         totalLoad_SB2 = self.df6['SB2[kWh]'].sum()
         totalLoad_SB2_SB1 = self.df6['SB2/SB1[kWh]'].sum()
@@ -152,10 +149,10 @@ class simulateStreetLight:
                              sl=True):
         """Trigger all methods for street light simulation."""
         self.config()
-        self.get_feedInData()
         self.get_standardLoad()
         self.electricityUsageIndex()
         self.simulateLoadAllRoad()
+        self.get_feedInData()
         self.plotLoadScenario()
 
 

@@ -66,7 +66,7 @@ osm2pgsql_num_processes:=1
 # 8. PostgreSQL connection parameters:
 #    The database will be created and hold the filtered OSM urban data
 postgres_cluster:=9.1/main
-postgres_database:=esy_Berlin_FlexiGIS_test_cch
+postgres_database:=esy_Berlin_FlexiGIS_test_2020
 postgres_user:=esa
 postgres_port:=5432
 postgres_host:=10.160.84.200

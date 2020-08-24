@@ -186,7 +186,7 @@ class GetPoints:
     def get_point_features(self, dataset):
         """Get OSM High way features."""
         self.highway_feature = ['bus_stop', 'crossing', 'give_way',
-                                'motorwyay_junction', 'passing_place',
+                                'motorway_junction', 'passing_place',
                                 'platform', 'speed_camera', 'stop',
                                 'street_lamp', 'traffic_signals']
         self.dataset = dataset.loc[dataset["highway"].

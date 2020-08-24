@@ -67,15 +67,15 @@ def oemof_power_system(data, dir_path):
 
     # create fixed source object representing wind power plants
     energysystem.add(solph.Source(label='wind', outputs={bel: solph.Flow(
-        actual_value=data['wind'], nominal_value=1000000, fixed=True)}))
+        actual_value=data['wind'], nominal_value=50000, fixed=True)}))
 
     # create fixed source object representing pv power plants
     energysystem.add(solph.Source(label='pv', outputs={bel: solph.Flow(
-        actual_value=data['pv'], nominal_value=582000, fixed=True)}))
+        actual_value=data['pv'], nominal_value=40000, fixed=True)}))
 
     # create simple sink object representing the electrical demand
     energysystem.add(solph.Sink(label='demand', inputs={bel: solph.Flow(
-        actual_value=data['demand_SB2'], fixed=True, nominal_value=1)}))
+        actual_value=data['demand_SB2_SB1'], fixed=True, nominal_value=1)}))
 
     # create simple transformer object representing a gas power plant
     # pp_gas = solph.Transformer(
