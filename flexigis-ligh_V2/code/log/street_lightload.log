@@ -1,0 +1,213 @@
+2020-08-19 10:53:54,869: INFO: directory 03_energy_requirements succesfully created!.
+2020-08-19 11:44:37,168: INFO: directory 03_energy_requirements already exists.
+2020-08-19 11:51:58,620: INFO: directory 03_energy_requirements already exists.
+2020-08-19 11:59:32,951: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:00:15,233: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:20:23,067: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:22:44,117: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:23:10,937: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:26:56,009: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:26:56,125: INFO: Read and normalise Standard Load Profiles.
+2020-08-19 12:26:56,126: DEBUG: Entering env context: <fiona.env.Env object at 0x7f35b01d7400>
+2020-08-19 12:26:56,126: DEBUG: Starting outermost env
+2020-08-19 12:26:56,127: DEBUG: No GDAL environment exists
+2020-08-19 12:26:56,127: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7f35b01d74a8> created
+2020-08-19 12:26:56,127: DEBUG: Logging error handler pushed.
+2020-08-19 12:26:56,127: DEBUG: All drivers registered.
+2020-08-19 12:26:56,127: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 12:26:56,128: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 12:26:56,128: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7f35b01d74a8>.
+2020-08-19 12:26:56,128: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7f35b01d74a8> with options {}
+2020-08-19 12:26:56,128: DEBUG: Entered env context: <fiona.env.Env object at 0x7f35b01d7400>
+2020-08-19 12:26:56,179: DEBUG: Got coordinate system
+2020-08-19 12:26:56,179: DEBUG: Got coordinate system
+2020-08-19 12:26:56,179: DEBUG: Index: 0
+2020-08-19 12:27:06,054: DEBUG: Flushed buffer
+2020-08-19 12:27:06,068: DEBUG: Stopped session
+2020-08-19 12:27:06,068: DEBUG: Exiting env context: <fiona.env.Env object at 0x7f35b01d7400>
+2020-08-19 12:27:06,068: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7f35b01d74a8> options
+2020-08-19 12:27:06,068: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7f35b01d74a8>.
+2020-08-19 12:27:06,068: DEBUG: Error handler popped.
+2020-08-19 12:27:06,068: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7f35b01d74a8>.
+2020-08-19 12:27:06,068: DEBUG: Exiting outermost env
+2020-08-19 12:27:06,069: DEBUG: Exited env context: <fiona.env.Env object at 0x7f35b01d7400>
+2020-08-19 12:27:06,069: DEBUG: Entering env context: <fiona.env.Env object at 0x7f35b01efc18>
+2020-08-19 12:27:06,069: DEBUG: Starting outermost env
+2020-08-19 12:27:06,069: DEBUG: No GDAL environment exists
+2020-08-19 12:27:06,069: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7f35afffb128> created
+2020-08-19 12:27:06,069: DEBUG: Logging error handler pushed.
+2020-08-19 12:27:06,069: DEBUG: All drivers registered.
+2020-08-19 12:27:06,070: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 12:27:06,070: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 12:27:06,070: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7f35afffb128>.
+2020-08-19 12:27:06,070: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7f35afffb128> with options {}
+2020-08-19 12:27:06,070: DEBUG: Entered env context: <fiona.env.Env object at 0x7f35b01efc18>
+2020-08-19 12:27:06,187: DEBUG: Got coordinate system
+2020-08-19 12:27:06,188: DEBUG: Got coordinate system
+2020-08-19 12:27:06,188: DEBUG: Index: 0
+2020-08-19 12:27:06,390: DEBUG: Flushed buffer
+2020-08-19 12:27:06,392: DEBUG: Stopped session
+2020-08-19 12:27:06,392: DEBUG: Exiting env context: <fiona.env.Env object at 0x7f35b01efc18>
+2020-08-19 12:27:06,392: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7f35afffb128> options
+2020-08-19 12:27:06,392: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7f35afffb128>.
+2020-08-19 12:27:06,392: DEBUG: Error handler popped.
+2020-08-19 12:27:06,392: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7f35afffb128>.
+2020-08-19 12:27:06,392: DEBUG: Exiting outermost env
+2020-08-19 12:27:06,392: DEBUG: Exited env context: <fiona.env.Env object at 0x7f35b01efc18>
+2020-08-19 12:33:05,611: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:33:06,042: INFO: Read and normalise Standard Load Profiles.
+2020-08-19 12:33:06,042: DEBUG: Entering env context: <fiona.env.Env object at 0x7f39f247e400>
+2020-08-19 12:33:06,043: DEBUG: Starting outermost env
+2020-08-19 12:33:06,043: DEBUG: No GDAL environment exists
+2020-08-19 12:33:06,043: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7f39f247e4a8> created
+2020-08-19 12:33:06,043: DEBUG: Logging error handler pushed.
+2020-08-19 12:33:06,044: DEBUG: All drivers registered.
+2020-08-19 12:33:06,044: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 12:33:06,044: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 12:33:06,044: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7f39f247e4a8>.
+2020-08-19 12:33:06,044: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7f39f247e4a8> with options {}
+2020-08-19 12:33:06,044: DEBUG: Entered env context: <fiona.env.Env object at 0x7f39f247e400>
+2020-08-19 12:33:06,105: DEBUG: Got coordinate system
+2020-08-19 12:33:06,106: DEBUG: Got coordinate system
+2020-08-19 12:33:06,106: DEBUG: Index: 0
+2020-08-19 12:33:15,491: DEBUG: Flushed buffer
+2020-08-19 12:33:15,492: DEBUG: Stopped session
+2020-08-19 12:33:15,492: DEBUG: Exiting env context: <fiona.env.Env object at 0x7f39f247e400>
+2020-08-19 12:33:15,493: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7f39f247e4a8> options
+2020-08-19 12:33:15,493: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7f39f247e4a8>.
+2020-08-19 12:33:15,493: DEBUG: Error handler popped.
+2020-08-19 12:33:15,493: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7f39f247e4a8>.
+2020-08-19 12:33:15,493: DEBUG: Exiting outermost env
+2020-08-19 12:33:15,493: DEBUG: Exited env context: <fiona.env.Env object at 0x7f39f247e400>
+2020-08-19 12:33:15,493: DEBUG: Entering env context: <fiona.env.Env object at 0x7f39f22a20b8>
+2020-08-19 12:33:15,493: DEBUG: Starting outermost env
+2020-08-19 12:33:15,493: DEBUG: No GDAL environment exists
+2020-08-19 12:33:15,493: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7f39f22a20f0> created
+2020-08-19 12:33:15,493: DEBUG: Logging error handler pushed.
+2020-08-19 12:33:15,494: DEBUG: All drivers registered.
+2020-08-19 12:33:15,494: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 12:33:15,494: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 12:33:15,494: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7f39f22a20f0>.
+2020-08-19 12:33:15,494: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7f39f22a20f0> with options {}
+2020-08-19 12:33:15,494: DEBUG: Entered env context: <fiona.env.Env object at 0x7f39f22a20b8>
+2020-08-19 12:33:15,513: DEBUG: Got coordinate system
+2020-08-19 12:33:15,514: DEBUG: Got coordinate system
+2020-08-19 12:33:15,514: DEBUG: Index: 0
+2020-08-19 12:33:15,708: DEBUG: Flushed buffer
+2020-08-19 12:33:15,730: DEBUG: Stopped session
+2020-08-19 12:33:15,730: DEBUG: Exiting env context: <fiona.env.Env object at 0x7f39f22a20b8>
+2020-08-19 12:33:15,730: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7f39f22a20f0> options
+2020-08-19 12:33:15,731: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7f39f22a20f0>.
+2020-08-19 12:33:15,731: DEBUG: Error handler popped.
+2020-08-19 12:33:15,731: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7f39f22a20f0>.
+2020-08-19 12:33:15,731: DEBUG: Exiting outermost env
+2020-08-19 12:33:15,731: DEBUG: Exited env context: <fiona.env.Env object at 0x7f39f22a20b8>
+2020-08-19 12:33:18,578: DEBUG: update_title_pos
+2020-08-19 12:33:18,620: DEBUG: findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/ChUnai/miniconda3/envs/pypsa-eur/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2020-08-19 12:33:18,676: DEBUG: findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('/home/ChUnai/miniconda3/envs/pypsa-eur/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2020-08-19 12:34:55,364: INFO: directory 03_energy_requirements already exists.
+2020-08-19 12:34:55,452: INFO: Read and normalise Standard Load Profiles.
+2020-08-19 12:34:55,453: DEBUG: Entering env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:34:55,453: DEBUG: Starting outermost env
+2020-08-19 12:34:55,454: DEBUG: No GDAL environment exists
+2020-08-19 12:34:55,454: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7fdbc7ef9390> created
+2020-08-19 12:34:55,454: DEBUG: Logging error handler pushed.
+2020-08-19 12:34:55,454: DEBUG: All drivers registered.
+2020-08-19 12:34:55,454: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 12:34:55,455: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 12:34:55,455: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7fdbc7ef9390>.
+2020-08-19 12:34:55,455: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7fdbc7ef9390> with options {}
+2020-08-19 12:34:55,455: DEBUG: Entered env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:34:55,487: DEBUG: Got coordinate system
+2020-08-19 12:34:55,488: DEBUG: Got coordinate system
+2020-08-19 12:34:55,488: DEBUG: Index: 0
+2020-08-19 12:35:04,760: DEBUG: Flushed buffer
+2020-08-19 12:35:04,764: DEBUG: Stopped session
+2020-08-19 12:35:04,764: DEBUG: Exiting env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:35:04,764: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7fdbc7ef9390> options
+2020-08-19 12:35:04,764: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fdbc7ef9390>.
+2020-08-19 12:35:04,764: DEBUG: Error handler popped.
+2020-08-19 12:35:04,765: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fdbc7ef9390>.
+2020-08-19 12:35:04,765: DEBUG: Exiting outermost env
+2020-08-19 12:35:04,765: DEBUG: Exited env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:35:04,765: DEBUG: Entering env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:35:04,765: DEBUG: Starting outermost env
+2020-08-19 12:35:04,765: DEBUG: No GDAL environment exists
+2020-08-19 12:35:04,765: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7fdbc7d1a048> created
+2020-08-19 12:35:04,765: DEBUG: Logging error handler pushed.
+2020-08-19 12:35:04,766: DEBUG: All drivers registered.
+2020-08-19 12:35:04,766: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 12:35:04,766: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 12:35:04,766: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7fdbc7d1a048>.
+2020-08-19 12:35:04,766: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7fdbc7d1a048> with options {}
+2020-08-19 12:35:04,766: DEBUG: Entered env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:35:04,773: DEBUG: Got coordinate system
+2020-08-19 12:35:04,773: DEBUG: Got coordinate system
+2020-08-19 12:35:04,773: DEBUG: Index: 0
+2020-08-19 12:35:04,973: DEBUG: Flushed buffer
+2020-08-19 12:35:04,974: DEBUG: Stopped session
+2020-08-19 12:35:04,974: DEBUG: Exiting env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:35:04,974: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7fdbc7d1a048> options
+2020-08-19 12:35:04,974: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fdbc7d1a048>.
+2020-08-19 12:35:04,974: DEBUG: Error handler popped.
+2020-08-19 12:35:04,974: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fdbc7d1a048>.
+2020-08-19 12:35:04,974: DEBUG: Exiting outermost env
+2020-08-19 12:35:04,974: DEBUG: Exited env context: <fiona.env.Env object at 0x7fdbc833cf98>
+2020-08-19 12:35:07,898: DEBUG: update_title_pos
+2020-08-19 12:35:07,927: DEBUG: findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/ChUnai/miniconda3/envs/pypsa-eur/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2020-08-19 12:35:07,994: DEBUG: findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('/home/ChUnai/miniconda3/envs/pypsa-eur/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2020-08-19 12:35:08,163: DEBUG: update_title_pos
+2020-08-19 12:35:08,207: INFO: Street. quarter hourly ERs simulated.
+2020-08-19 16:34:10,065: INFO: directory 03_energy_requirements already exists.
+2020-08-19 16:34:10,141: INFO: Read and normalise Standard Load Profiles.
+2020-08-19 16:34:10,141: DEBUG: Entering env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:10,142: DEBUG: Starting outermost env
+2020-08-19 16:34:10,142: DEBUG: No GDAL environment exists
+2020-08-19 16:34:10,142: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7fc592481f28> created
+2020-08-19 16:34:10,142: DEBUG: Logging error handler pushed.
+2020-08-19 16:34:10,143: DEBUG: All drivers registered.
+2020-08-19 16:34:10,143: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 16:34:10,143: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 16:34:10,143: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7fc592481f28>.
+2020-08-19 16:34:10,143: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7fc592481f28> with options {}
+2020-08-19 16:34:10,143: DEBUG: Entered env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:10,176: DEBUG: Got coordinate system
+2020-08-19 16:34:10,177: DEBUG: Got coordinate system
+2020-08-19 16:34:10,177: DEBUG: Index: 0
+2020-08-19 16:34:20,062: DEBUG: Flushed buffer
+2020-08-19 16:34:20,064: DEBUG: Stopped session
+2020-08-19 16:34:20,064: DEBUG: Exiting env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:20,064: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7fc592481f28> options
+2020-08-19 16:34:20,064: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fc592481f28>.
+2020-08-19 16:34:20,064: DEBUG: Error handler popped.
+2020-08-19 16:34:20,064: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fc592481f28>.
+2020-08-19 16:34:20,064: DEBUG: Exiting outermost env
+2020-08-19 16:34:20,064: DEBUG: Exited env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:20,065: DEBUG: Entering env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:20,065: DEBUG: Starting outermost env
+2020-08-19 16:34:20,065: DEBUG: No GDAL environment exists
+2020-08-19 16:34:20,065: DEBUG: New GDAL environment <fiona._env.GDALEnv object at 0x7fc5922860f0> created
+2020-08-19 16:34:20,065: DEBUG: Logging error handler pushed.
+2020-08-19 16:34:20,065: DEBUG: All drivers registered.
+2020-08-19 16:34:20,065: DEBUG: GDAL_DATA found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/gdal'.
+2020-08-19 16:34:20,066: DEBUG: PROJ_LIB found in environment: '/home/ChUnai/miniconda3/envs/pypsa-eur/share/proj'.
+2020-08-19 16:34:20,066: DEBUG: Started GDALEnv <fiona._env.GDALEnv object at 0x7fc5922860f0>.
+2020-08-19 16:34:20,066: DEBUG: Updated existing <fiona._env.GDALEnv object at 0x7fc5922860f0> with options {}
+2020-08-19 16:34:20,066: DEBUG: Entered env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:20,073: DEBUG: Got coordinate system
+2020-08-19 16:34:20,073: DEBUG: Got coordinate system
+2020-08-19 16:34:20,073: DEBUG: Index: 0
+2020-08-19 16:34:20,268: DEBUG: Flushed buffer
+2020-08-19 16:34:20,269: DEBUG: Stopped session
+2020-08-19 16:34:20,269: DEBUG: Exiting env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:20,269: DEBUG: Cleared existing <fiona._env.GDALEnv object at 0x7fc5922860f0> options
+2020-08-19 16:34:20,269: DEBUG: Stopping GDALEnv <fiona._env.GDALEnv object at 0x7fc5922860f0>.
+2020-08-19 16:34:20,269: DEBUG: Error handler popped.
+2020-08-19 16:34:20,269: DEBUG: Stopped GDALEnv <fiona._env.GDALEnv object at 0x7fc5922860f0>.
+2020-08-19 16:34:20,269: DEBUG: Exiting outermost env
+2020-08-19 16:34:20,269: DEBUG: Exited env context: <fiona.env.Env object at 0x7fc592921ac8>
+2020-08-19 16:34:23,356: DEBUG: update_title_pos
+2020-08-19 16:34:23,378: DEBUG: findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/ChUnai/miniconda3/envs/pypsa-eur/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2020-08-19 16:34:23,434: DEBUG: findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('/home/ChUnai/miniconda3/envs/pypsa-eur/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2020-08-19 16:34:23,617: DEBUG: update_title_pos
+2020-08-19 16:34:23,670: INFO: Street. quarter hourly ERs simulated.
