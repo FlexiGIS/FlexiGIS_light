@@ -35,7 +35,6 @@
 #=================================================================================#
 #              Setting the config file                                            #
 #=================================================================================#
-
 config:=config.mk
 include $(config)
 #=================================================================================#
@@ -86,7 +85,7 @@ pbf_data:
 	@echo "INFO: Filtered pbf file generated"
 	@echo "===================================="
 #=================================================================================#
-#              URBAN DATA FILTER                                     		  #
+#              URBAN DATA FILTER                                     		     #
 #=================================================================================#
 filter:
 	@echo "\nSTEP 3 \n:"
@@ -156,19 +155,19 @@ feedin:
 
 # Step5: Modelling urban energy requirements
 streetlight_load:
-	@echo "\nSTEP 8 \n:" 
+	@echo "\nSTEP 8 \n:"
 	@echo "\n Modelling Streetlight Load and saving utput as csv file to folder '$(load_folder)':"
 	@date >> log/streetlight.log
 	@if [ -e $(LINES_SHP) ]; then python street_scenarios.py ; fi
 	@echo "streetlight energy modelling done." >> log/streetlight.log
 	@echo "INFO: Street load simulation complete."
 	@echo "===================================="
-	
+
 #=================================================================================#
 #              FEEDIN AND REQUIREMENT OPTIMIZATION                                #
 #=================================================================================#
 optimization:
-	@echo "\nSTEP 8 \n:" 	
+	@echo "\nSTEP 8 \n:"
 	@echo "\n Optimization of Storage and Supply"
 	@if [ -e $(COMMODITIES) ]; then python optimize.py ; fi
 	@echo "Info: Done!"

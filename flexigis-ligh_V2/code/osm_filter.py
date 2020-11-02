@@ -57,7 +57,7 @@ def filter_highway_lines(shp_file_lines, desitination_folder):
     highway_lines = highway_lines.sort_values("highway")
     highway_lines.to_file(driver='ESRI Shapefile',
                           filename=desitination_folder+"osm_lines")
-    print(highway_lines.head())
+    print(highway_lines.head(20))
 
 # Filter highway points
 
@@ -89,7 +89,7 @@ def filter_highway_shapes(shape_file_polygon, desitination_folder):
     highway_shapes = highway_shapes.to_crs({'init': 'epsg:3857'})
 
     # convert None entries to nan string
-    highway_shapes = highway_shapes.fillna(value=np.nan)
+    #highway_shapes = highway_shapes.fillna(value=np.nan)
     highway_shapes = highway_shapes.loc[:, [
         "osm_way_id", "other_tags", "geometry"]]
     highway_shapes = highway_shapes[highway_shapes["other_tags"].notna()]
@@ -132,7 +132,7 @@ def filter_highway_shapes(shape_file_polygon, desitination_folder):
     highway_shapes_df['area'] = highway_shapes_df.geometry.area
     highway_shapes_df.to_file(driver='ESRI Shapefile',
                               filename=desitination_folder+"osm_shapes")
-    print(highway_shapes_df.head())
+    print(highway_shapes_df.head(20))
 
 
 if __name__ == "__main__":
