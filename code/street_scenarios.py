@@ -103,12 +103,12 @@ class simulateStreetLight:
 
         self.df6 = pd.read_csv(os.path.join(self.output_path, "streetlight_load.csv"),
                                delimiter=";", index_col='TIME', parse_dates=True)
-        self.df6 = self.df6.iloc[0:8760]  # TODO: fix index
+        self.df6 = self.df6.iloc[0:len(wind.index)]  # TODO: fix index
         self.feedin['demand_SB1'] = self.df6['SB1[kWh]'].values
         self.feedin['demand_SB2'] = self.df6['SB2[kWh]'].values
         self.df6['SB2/SB1[kWh]'] = self.df6['SB2_mainroad[kWh]'] + \
             self. df6['SB1_rest[kWh]']
-        self.feedin['demand_SB2_SB1'] = self.df6['mix[kWh]'].values
+        self.feedin['demand_SB2_SB1'] = self.df6['SB2/SB1[kWh]'].values
         self.feedin.to_csv(os.path.join(
             self.output_path, 'optimization-commodities.csv'))
 
