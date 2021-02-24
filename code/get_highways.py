@@ -105,7 +105,9 @@ class GetLines:
         self.new_data_ = self.dataset.set_index(["highway"])
         self._width_ = dict(zip(self.highway_feature, self.width))
         # compute area and save data to csv
-        new_data = compute_area(self.new_data_, self._width_)
+        check_features_ = set(dataset.index.unique()).intersection(self.highway_feature)
+        width_ = {k: self._width_[k] for k in check_features_}
+        new_data = compute_area(self.new_data_, width_)
         data_to_csv(new_data, destination+self.table+".csv")
         logging.info("csv file of line properties generated.")
 
