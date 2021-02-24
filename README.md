@@ -1,7 +1,7 @@
 
 # FlexiGIS-Light
 
-[![Documentation Status](https://readthedocs.org/projects/flexigis/badge/?version=latest)](https://flexigis.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/flexigis/badge/?version=latest)](https://flexigis.readthedocs.io/en/latest/?badge=latest)[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4497563.svg)](https://doi.org/10.5281/zenodo.4497563)
 
 FlexiGIS-Light is a sub module of FlexiGIS, which is free and open source GIS-based plattform. The extracted urban energy infrustructure are based mainly on OpenStreetMap data.
 
