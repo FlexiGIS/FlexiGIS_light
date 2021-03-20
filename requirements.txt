@@ -14,7 +14,7 @@ Fiona==1.8.11
 geopandas==0.4.1
 idna==2.8
 imagesize==1.1.0
-Jinja2==2.10.3
+Jinja2==2.11.3
 jinja2-time==0.2.0
 kiwisolver==1.1.0
 make==0.1.5
