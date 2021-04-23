@@ -7,6 +7,7 @@ from db_connect import dbconn_from_args
 import logging
 import os
 from pathlib import Path
+import numpy as np
 
 
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
@@ -33,12 +34,13 @@ def compute_area(dataset, width):
     as value.
 
     """
-    Area = []
+    #Area = []
+    dataset['area'] = np.nan
     for key, value in width.items():
-        area = dataset.loc[key]["length"]*value
-        Area.append(area)
-    Area = pd.concat(Area)
-    dataset["area"] = Area.values
+        dataset.loc[key]['area'] = dataset.loc[key]["length"]*value
+        #Area.append(area)
+    #Area = pd.concat(Area)
+    #dataset["area"] = Area.values
     dataset_new = dataset.reset_index()
     return dataset_new
 
@@ -102,7 +104,7 @@ class GetLines:
                       6.5, 6.5, 6.5]
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
-        self.new_data_ = self.dataset.set_index(["highway"])
+        self.new_data_ = self.dataset.set_index("highway")
         self._width_ = dict(zip(self.highway_feature, self.width))
         # compute area and save data to csv
         check_features_ = set(dataset.index.unique()).intersection(self.highway_feature)
