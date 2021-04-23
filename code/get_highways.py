@@ -37,7 +37,8 @@ def compute_area(dataset, width):
     #Area = []
     dataset['area'] = np.nan
     for key, value in width.items():
-        dataset.loc[key]['area'] = dataset.loc[key]["length"]*value
+        #area = dataset.loc[key]["length"]*value
+        dataset.loc[key, 'area'] = dataset.loc[key]["length"]*value
         #Area.append(area)
     #Area = pd.concat(Area)
     #dataset["area"] = Area.values
@@ -95,20 +96,21 @@ class GetLines:
     # get features from dataframe
     def get_line_features(self, dataset):
         """Get OSM High way features."""
-        self.highway_feature = ['living_street', 'motorway', 'pedestrian',
+        self.highway_feature = {'living_street', 'motorway', 'pedestrian',
                                 'primary', 'secondary', 'service', 'tertiary',
                                 'trunk', 'motorway_link', 'primary_link',
                                 'secondary_link', 'tertiary_link',
-                                'trunk_link']
+                                'trunk_link'}
         self.width = [7.5, 15.50, 7.5, 10.5, 9.5, 7.5, 9.5, 9.5, 6.5, 6.5,
                       6.5, 6.5, 6.5]
+        self.highway_width_ = dict(zip(self.highway_feature, self.width))
         self.dataset = dataset.loc[dataset["highway"].
                                    isin(self.highway_feature)]
         self.new_data_ = self.dataset.set_index("highway")
-        self._width_ = dict(zip(self.highway_feature, self.width))
+        
         # compute area and save data to csv
-        check_features_ = set(dataset.index.unique()).intersection(self.highway_feature)
-        width_ = {k: self._width_[k] for k in check_features_}
+        check_features_ = set(self.new_data_.index.unique()).intersection(self.highway_feature)
+        width_ = {k: self.highway_width_[k] for k in check_features_}
         new_data = compute_area(self.new_data_, width_)
         data_to_csv(new_data, destination+self.table+".csv")
         logging.info("csv file of line properties generated.")
