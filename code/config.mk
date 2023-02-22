@@ -67,10 +67,10 @@ osm2pgsql_num_processes:=1
 #    The database will be created and hold the filtered OSM urban data
 postgres_cluster:=9.1/main
 postgres_database:=esy_Berlin_FlexiGIS_test_2020
-postgres_user:=esa
-postgres_port:=5432
-postgres_host:=10.160.84.200
-postgres_password:=pg3sa
+postgres_user:=xxxx
+postgres_port:=xxxxx
+postgres_host:=xxxxx
+postgres_password:=xxxxxx
 
 # 9. Location of the output folders
 urban_output:=../data/02_urban_output_data/
